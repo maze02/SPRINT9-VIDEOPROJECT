@@ -1,25 +1,101 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useRef, useEffect, useCallback } from "react";
+import axios from "axios";
+import SearchBar from "./components/SearchBar";
+import VideoList from "./components/VideoList";
+import VideoDetail from "./components/VideoDetail";
 
-function App() {
+const App = () => {
+  const [videos, setVideos] = useState([]);
+  const searchRef = useRef();
+  const [videoSearchErr, setVideoSearchErr] = useState({
+    status: false,
+    errLog: [],
+  });
+  const [loadVideos, setLoadVideos] = useState(true);
+  const [selectedVideo, setSelectedVideo] = useState({});
+  const [loadSelVideo, setLoadSelVideo] = useState(false);
+  const [selVidErr, setSelVidErr] = useState(false);
+  const [searchItem, setSearchItem] = useState("");
+  const [selectId, setSelectId] = useState("");
+
+  const getVideos = async () => {
+    let apiKey = "AIzaSyBDTa_O7QZwGJ4mIvREEEuYgvgp4h5YzfM";
+    // let apiKey1 = "AIzaSyC2K8hzdZpjh9d_U1iNFFAxCt5vrO8-znM";
+
+    try {
+      let searchStr = searchRef.current.value
+        ? searchRef.current.value
+        : "penguins";
+      let res = await axios.get(
+        "https://youtube.googleapis.com/youtube/v3/search?",
+        {
+          params: {
+            part: "snippet",
+            maxResults: 25,
+            q: searchStr,
+            key: apiKey,
+            videoEmbeddable: "any",
+          },
+        }
+      );
+      await console.log(searchStr);
+      await console.log(res.data.items);
+      await setVideos((prev) => res.data.items);
+      await localStorage.setItem(searchStr, JSON.stringify(res.data.items));
+      setLoadVideos(false);
+    } catch (error) {
+      setLoadVideos(false);
+      console.log(error.message);
+      console.log(error.statusCode);
+      setVideoSearchErr((prev) => {
+        return {
+          status: true,
+          errLog: [...videoSearchErr.errLog, { error }],
+        };
+      });
+    }
+  };
+
+  //for default load
+  useEffect(() => {
+    getVideos();
+  }, []);
+
+  //get default load from firestore?
+
+  useEffect(() => {
+    localStorage.setItem("videoSearchErr", JSON.stringify(videoSearchErr));
+    console.log(videoSearchErr.errLog.length);
+  }, [videoSearchErr]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLoadVideos(true);
+    console.log("submitting " + searchRef.current.value);
+    setSearchItem((prev) => searchRef.current.value);
+    localStorage.setItem("searchItem", searchRef.current.value);
+    getVideos();
+  };
+  const handleVideoSelect = (id) => {
+    console.log(id);
+    console.log("Hey I clicked on an image and its id is:" + id);
+    setSelectId((prev) => id);
+    localStorage.setItem("selectId", JSON.stringify(selectId));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Video Project App </h1>
+      <SearchBar searchRef={searchRef} handleSubmit={handleSubmit} />
+      {videoSearchErr.status && <h1>Error. Please try again later.</h1>}
+      <VideoDetail loadVideos={loadVideos} selectId={selectId} />
+      <VideoList
+        loadVideos={loadVideos}
+        searchRef={searchRef}
+        handleVideoSelect={handleVideoSelect}
+      />
     </div>
   );
-}
+};
 
 export default App;
