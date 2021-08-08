@@ -11,9 +11,10 @@ const Wrapper = styled.div`
   /*  width: 90vw; */
   width: 100%;
   margin-bottom: 1rem;
-  max-width: 300px;
+  min-width: 200px;
   background: grey;
   border-radius: 0.25rem;
+  cursor: pointer;
 
   img {
     width: 100%;

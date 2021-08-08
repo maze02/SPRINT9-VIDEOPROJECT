@@ -74,6 +74,10 @@ code {
           flex-direction: column;
 }
 
+.video {
+  position: relative;
+}
+
 .videodetail-card {
   /*  width: 90vw; */
   width: 100%;
@@ -85,11 +89,6 @@ code {
 
 .videodetail-card .video-thumbnail {
   cursor: pointer;
-}
-
-.videodetail-card .video-thumbnail .video {
-  float: left;
-  position: relative;
 }
 
 .videodetail-card .video-thumbnail .video span {
@@ -147,13 +146,14 @@ code {
 
 @media screen and (min-width: 578px) {
   .section-video-wrapper {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 7fr 3fr;
+        grid-template-columns: 7fr 3fr;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    gap: 0rem 2rem;
   }
 }
 /*# sourceMappingURL=index.css.map */

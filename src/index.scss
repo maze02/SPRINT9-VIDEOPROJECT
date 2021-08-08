@@ -49,21 +49,13 @@ code {
 
   input {
     border-radius: 30px;
-
     flex: 1;
-
     height: 40px;
-
     border: none;
-
     outline: none;
-
     font-size: 18px;
-
     padding-left: 10px;
-
     margin-left: 10px;
-
     background: transparent;
   }
 }
@@ -71,6 +63,9 @@ code {
 .videolist-wrapper {
   display: flex;
   flex-direction: column;
+}
+.video {
+  position: relative;
 }
 
 .videodetail-card {
@@ -85,9 +80,6 @@ code {
   .video-thumbnail {
     cursor: pointer;
     .video {
-      float: left;
-      position: relative;
-
       span {
         width: 100%;
         height: 100%;
@@ -134,7 +126,9 @@ code {
   flex-direction: column;
 
   @media screen and (min-width: 578px) {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    justify-content: center;
+    gap: 0rem 2rem;
   }
 }
