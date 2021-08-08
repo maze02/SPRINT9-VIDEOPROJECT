@@ -19,8 +19,8 @@ const App = () => {
   const [selectId, setSelectId] = useState("");
 
   const getVideos = async () => {
-    let apiKey = "AIzaSyBDTa_O7QZwGJ4mIvREEEuYgvgp4h5YzfM";
-    // let apiKey1 = "AIzaSyC2K8hzdZpjh9d_U1iNFFAxCt5vrO8-znM";
+    let apiKey1 = "AIzaSyBDTa_O7QZwGJ4mIvREEEuYgvgp4h5YzfM";
+    let apiKey = "AIzaSyC2K8hzdZpjh9d_U1iNFFAxCt5vrO8-znM";
 
     try {
       let searchStr = searchRef.current.value
@@ -42,6 +42,12 @@ const App = () => {
       await console.log(res.data.items);
       await setVideos((prev) => res.data.items);
       await localStorage.setItem(searchStr, JSON.stringify(res.data.items));
+      setVideoSearchErr((prev) => {
+        return {
+          status: false,
+          errLog: [...videoSearchErr.errLog],
+        };
+      });
       setLoadVideos(false);
     } catch (error) {
       setLoadVideos(false);
@@ -76,6 +82,7 @@ const App = () => {
     localStorage.setItem("searchItem", searchRef.current.value);
     getVideos();
   };
+
   const handleVideoSelect = (id) => {
     console.log(id);
     console.log("Hey I clicked on an image and its id is:" + id);
@@ -87,13 +94,19 @@ const App = () => {
     <div>
       <h1>Video Project App </h1>
       <SearchBar searchRef={searchRef} handleSubmit={handleSubmit} />
-      {videoSearchErr.status && <h1>Error. Please try again later.</h1>}
-      <VideoDetail loadVideos={loadVideos} selectId={selectId} />
-      <VideoList
-        loadVideos={loadVideos}
-        searchRef={searchRef}
-        handleVideoSelect={handleVideoSelect}
-      />
+      {videoSearchErr.status && (
+        <h2 className="text-center">Error. Please try again later.</h2>
+      )}
+      {!videoSearchErr.status && (
+        <section className="section-video-wrapper">
+          <VideoDetail loadVideos={loadVideos} selectId={selectId} />
+          <VideoList
+            loadVideos={loadVideos}
+            searchRef={searchRef}
+            handleVideoSelect={handleVideoSelect}
+          />
+        </section>
+      )}
     </div>
   );
 };

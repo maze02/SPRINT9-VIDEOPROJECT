@@ -1,3 +1,5 @@
+import CardSecondary from "./UI/Card";
+
 const VideoItem = ({
   id,
   title,
@@ -7,7 +9,27 @@ const VideoItem = ({
   date,
 }) => {
   return (
-    <div onClick={() => handleVideoSelect(id)}>
+    <CardSecondary id={id} pressed={handleVideoSelect}>
+      <img src={url} alt={title} />
+      <h5>{title}</h5>
+      <p>{date}</p>
+    </CardSecondary>
+  );
+};
+
+export default VideoItem;
+
+/*
+const VideoItem = ({
+  id,
+  title,
+  handleVideoSelect,
+  description,
+  url,
+  date,
+}) => {
+  return (
+    <div id={id} onClick={() => handleVideoSelect(id)}>
       <img src={url} alt={title} />
       <h5>{title}</h5>
       <p>{date}</p>
@@ -17,3 +39,5 @@ const VideoItem = ({
 };
 
 export default VideoItem;
+
+*/

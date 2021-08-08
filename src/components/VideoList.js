@@ -3,7 +3,7 @@ import VideoItem from "./VideoItem";
 const VideoList = ({ searchRef, loadVideos, handleVideoSelect }) => {
   let videoListShow = null;
   try {
-    if (!loadVideos) {
+    if (!loadVideos && searchRef.current.value !== null) {
       let searchStr = searchRef.current.value
         ? searchRef.current.value
         : "penguins";
@@ -11,7 +11,7 @@ const VideoList = ({ searchRef, loadVideos, handleVideoSelect }) => {
       videoListShow = videoListArr.map((e) => {
         return (
           <VideoItem
-            key={e.id.videoId}
+            key={e.snippet.title}
             id={e.id.videoId}
             title={e.snippet.title}
             description={e.snippet.description}
@@ -26,10 +26,10 @@ const VideoList = ({ searchRef, loadVideos, handleVideoSelect }) => {
     console.log(error);
   }
   return (
-    <div>
+    <div className="videolist-wrapper">
       <h3>VideoList component</h3>
       {loadVideos && <p>Loading videoList...</p>}
-      {videoListShow}
+      {!loadVideos && videoListShow !== null && videoListShow}
     </div>
   );
 };

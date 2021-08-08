@@ -7,15 +7,17 @@ const VideoDetail = ({ loadVideos, selectId }) => {
   let selectedVid = null;
 
   if (!loadVideos) {
+    selectedVid = JSON.parse(localStorage.getItem("penguins"))[0];
     //loop through to find the video
-
-    if (selectId === "") {
-      selectedVid = JSON.parse(localStorage.getItem("penguins"))[0];
+    /*
+    if (selectId !== "") {
+      
     }
+*/
   }
 
   return (
-    <Fragment>
+    <div className="videodetail-card">
       {!loadVideos && (
         <div>
           <h4>VideoDetail component</h4>
@@ -29,7 +31,7 @@ const VideoDetail = ({ loadVideos, selectId }) => {
         </div>
       )}
       {loadVideos && <p>video loading</p>}
-    </Fragment>
+    </div>
   );
 };
 
