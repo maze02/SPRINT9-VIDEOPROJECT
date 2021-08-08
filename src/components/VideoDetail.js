@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-const VideoDetail = ({ loadVideos, selectId }) => {
+const VideoDetail = ({ loadVideos, selectId, selectedVideo }) => {
   let url = null;
   let title = null;
   let date = null;
@@ -8,12 +8,10 @@ const VideoDetail = ({ loadVideos, selectId }) => {
 
   if (!loadVideos) {
     selectedVid = JSON.parse(localStorage.getItem("penguins"))[0];
-    //loop through to find the video
-    /*
-    if (selectId !== "") {
-      
+
+    if (selectedVideo !== null) {
+      selectedVid = selectedVideo;
     }
-*/
   }
 
   return (
@@ -21,10 +19,15 @@ const VideoDetail = ({ loadVideos, selectId }) => {
       {!loadVideos && (
         <div>
           <h4>VideoDetail component</h4>
-          <img
-            src={selectedVid.snippet.thumbnails.high.url}
-            alt={selectedVid.snippet.title}
-          />
+          <div className="video-thumbnail">
+            <div class="video">
+              <span></span>
+              <img
+                src={selectedVid.snippet.thumbnails.high.url}
+                alt={selectedVid.snippet.title}
+              />
+            </div>
+          </div>
           <h5>{selectedVid.snippet.title}</h5>
           <p>{selectedVid.snippet.publishTime}</p>
           <p>{selectedVid.snippet.description}</p>

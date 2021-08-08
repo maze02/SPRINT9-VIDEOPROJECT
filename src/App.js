@@ -12,7 +12,7 @@ const App = () => {
     errLog: [],
   });
   const [loadVideos, setLoadVideos] = useState(true);
-  const [selectedVideo, setSelectedVideo] = useState({});
+  const [selectedVideo, setSelectedVideo] = useState(null);
   const [loadSelVideo, setLoadSelVideo] = useState(false);
   const [selVidErr, setSelVidErr] = useState(false);
   const [searchItem, setSearchItem] = useState("");
@@ -48,6 +48,8 @@ const App = () => {
           errLog: [...videoSearchErr.errLog],
         };
       });
+      await setSearchItem((prev) => searchStr);
+      await localStorage.setItem("searchItem", searchStr);
       setLoadVideos(false);
     } catch (error) {
       setLoadVideos(false);
@@ -78,8 +80,6 @@ const App = () => {
     event.preventDefault();
     setLoadVideos(true);
     console.log("submitting " + searchRef.current.value);
-    setSearchItem((prev) => searchRef.current.value);
-    localStorage.setItem("searchItem", searchRef.current.value);
     getVideos();
   };
 
@@ -88,6 +88,22 @@ const App = () => {
     console.log("Hey I clicked on an image and its id is:" + id);
     setSelectId((prev) => id);
     localStorage.setItem("selectId", JSON.stringify(selectId));
+    console.log("searchItem : " + searchItem);
+    console.log("videos : " + videos);
+    //let searchItemNow = JSON.parse(localStorage.getItem("searchItem"));
+    //console.log("searchItemNow  =" + searchItemNow);
+    /*
+    let searchArr = JSON.parse(localStorage.getItem(searchItemNow));
+    */
+    let selectItem = null;
+    for (let i = 0; i < videos.length; i++) {
+      if (id.localeCompare(videos[i].id.videoId) === 0) {
+        selectItem = videos[i];
+        console.log("OIIII selectedItem's id   " + selectItem.id.videoId);
+        setSelectedVideo((prev) => selectItem);
+        localStorage.setItem("selectedVideo", selectItem);
+      }
+    }
   };
 
   return (
@@ -99,7 +115,11 @@ const App = () => {
       )}
       {!videoSearchErr.status && (
         <section className="section-video-wrapper">
-          <VideoDetail loadVideos={loadVideos} selectId={selectId} />
+          <VideoDetail
+            loadVideos={loadVideos}
+            selectId={selectId}
+            selectedVideo={selectedVideo}
+          />
           <VideoList
             loadVideos={loadVideos}
             searchRef={searchRef}
