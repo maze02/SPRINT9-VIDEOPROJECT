@@ -7,9 +7,10 @@ const VideoDetail = ({ loadVideos, selectId, selectedVideo }) => {
   let selectedVid = null;
 
   if (!loadVideos) {
-    selectedVid = JSON.parse(localStorage.getItem("penguins"))[0];
-
-    if (selectedVideo !== null) {
+    if (selectedVideo === null) {
+      selectedVid = JSON.parse(localStorage.getItem("penguins"))[0];
+      selectId = selectedVid.id.videoId;
+    } else {
       selectedVid = selectedVideo;
     }
   }
@@ -19,23 +20,15 @@ const VideoDetail = ({ loadVideos, selectId, selectedVideo }) => {
       {!loadVideos && (
         <div>
           <h4>VideoDetail component</h4>
-          <iframe
-            width="560"
-            height="315"
-            src={`https://www.youtube.com/embed/${selectId}?controls=0`}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+
           <div className="video-thumbnail">
-            <div className="video">
-              <span></span>
-              <img
-                src={selectedVid.snippet.thumbnails.high.url}
-                alt={selectedVid.snippet.title}
-              />
-            </div>
+            <iframe
+              src={`https://www.youtube.com/embed/${selectId}?controls=0`}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
           </div>
           <h5>{selectedVid.snippet.title}</h5>
           <p>{selectedVid.snippet.publishTime}</p>
@@ -55,4 +48,15 @@ export default VideoDetail;
     let detailId = localId ? localId : "OF0w9z_JUJs";
   }),[selectId];
 
+  <iframe
+            width="560"
+            height="315"
+            src={`https://www.youtube.com/embed/${selectId}?controls=0`}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+
 */
+//rbzxxbuk3sk
