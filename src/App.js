@@ -110,6 +110,15 @@ const App = () => {
     <div>
       <h1>Video Project App </h1>
       <SearchBar searchRef={searchRef} handleSubmit={handleSubmit} />
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/rbzxxbuk3sk"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
       {videoSearchErr.status && (
         <h2 className="text-center">Error. Please try again later.</h2>
       )}
