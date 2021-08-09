@@ -19,8 +19,17 @@ const VideoDetail = ({ loadVideos, selectId, selectedVideo }) => {
       {!loadVideos && (
         <div>
           <h4>VideoDetail component</h4>
+          <iframe
+            width="560"
+            height="315"
+            src={`https://www.youtube.com/embed/${selectId}?controls=0`}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
           <div className="video-thumbnail">
-            <div class="video">
+            <div className="video">
               <span></span>
               <img
                 src={selectedVid.snippet.thumbnails.high.url}
