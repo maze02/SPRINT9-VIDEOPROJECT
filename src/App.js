@@ -42,6 +42,21 @@ const App = () => {
       await console.log(res.data.items);
       await setVideos((prev) => res.data.items);
       await localStorage.setItem(searchStr, JSON.stringify(res.data.items));
+
+      if (
+        videos.length === 0 ||
+        searchStr.localeCompare(
+          JSON.parse(localStorage.getItem(searchItem))
+        ) !== 0
+      ) {
+        await localStorage.setItem(searchStr, JSON.stringify(res.data.items));
+      } else {
+        await localStorage.setItem(
+          searchStr,
+          JSON.stringify([...videos, ...res.data.items])
+        );
+      }
+
       setVideoSearchErr((prev) => {
         return {
           status: false,
