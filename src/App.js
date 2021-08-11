@@ -165,8 +165,10 @@ const App = () => {
   return (
     <Fragment>
       <header>
-        <h1>Video Project App </h1>
-        <SearchBar searchRef={searchRef} handleSubmit={handleSubmit} />
+        <div className="border">
+          <h1 className="heading1">Video Search </h1>
+          <SearchBar searchRef={searchRef} handleSubmit={handleSubmit} />
+        </div>
       </header>
       <main>
         {videoSearchErr.status && (

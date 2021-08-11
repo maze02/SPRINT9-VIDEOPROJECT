@@ -9,29 +9,37 @@ const CardSecondary = ({ children, id, pressed }) => {
 
 const Wrapper = styled.div`
   /*  width: 90vw; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   width: 100%;
-  margin-bottom: 1rem;
+  margin: 0rem 1rem 1rem 0rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid black;
   min-width: 200px;
-  background: grey;
-  border-radius: 0.25rem;
+  /* background: grey;*/
+  background-color: white;
+  // border-radius: 0.25rem;
   cursor: pointer;
-
   img {
     width: 100%;
-    border-radius: 0.25rem 0.25rem 0rem 0rem;
+    //border-radius: 0.25rem 0.25rem 0rem 0rem;
   }
 
-  h5 {
-    margin-top: 1rem;
-  }
+  .description-brief {
+    margin-right: 1rem;
 
-  p {
-    margin-top: -0.7rem;
-    padding-bottom: 1rem;
-  }
-  h5,
-  p {
-    padding-left: 1rem;
+    h5 {
+      margin-top: 1rem;
+    }
+
+    p {
+      margin-top: -0.7rem;
+      padding-bottom: 1rem;
+    }
+    h5,
+    p {
+      padding-left: 1rem;
+    }
   }
 `;
 

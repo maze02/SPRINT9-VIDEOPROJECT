@@ -11,8 +11,10 @@ const VideoItem = ({
   return (
     <CardSecondary id={id} pressed={handleVideoSelect}>
       <img src={url} alt={title} />
-      <h5>{title}</h5>
-      <p>{date}</p>
+      <div className="description-brief">
+        <h5>{title}</h5>
+        <p>{date}</p>
+      </div>
     </CardSecondary>
   );
 };

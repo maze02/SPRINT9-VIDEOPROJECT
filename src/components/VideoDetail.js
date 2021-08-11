@@ -28,9 +28,10 @@ const VideoDetail = ({ loadVideos, selectId, selectedVideo }) => {
               allowFullScreen
             ></iframe>
           </div>
-          <h5>{selectedVid.snippet.title}</h5>
-          <p>{selectedVid.snippet.publishTime}</p>
-          <p>{selectedVid.snippet.description}</p>
+          <div className="description">
+            <h5>{selectedVid.snippet.title}</h5>
+            <p>{selectedVid.snippet.description}</p>
+          </div>
         </div>
       )}
       {loadVideos && <p>video loading</p>}
@@ -40,6 +41,9 @@ const VideoDetail = ({ loadVideos, selectId, selectedVideo }) => {
 
 export default VideoDetail;
 
+/*
+    <p>{selectedVid.snippet.publishTime}</p>
+*/
 /*
   useEffect(() => {
     let localId = JSON.parse(localStorage.getItem("selectId"));

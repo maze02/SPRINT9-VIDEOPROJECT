@@ -27,7 +27,6 @@ const VideoList = ({ searchRef, loadVideos, handleVideoSelect }) => {
   }
   return (
     <div className="videolist-wrapper">
-      <h3>Related Videos</h3>
       {loadVideos && <p>Loading videoList...</p>}
       {!loadVideos && videoListShow !== null && videoListShow}
     </div>
@@ -35,3 +34,5 @@ const VideoList = ({ searchRef, loadVideos, handleVideoSelect }) => {
 };
 
 export default VideoList;
+
+/*      <h3 className="heading3">Related Videos</h3>*/
