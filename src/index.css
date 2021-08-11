@@ -129,10 +129,6 @@ main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-<<<<<<< HEAD
-  /*top: 7rem;*/
-=======
->>>>>>> 29e9bfd (UI for level1 standard added)
   position: -webkit-sticky;
   position: sticky;
   overflow-y: scroll;
