@@ -3,7 +3,10 @@ import VideoItem from "./VideoItem";
 const VideoList = ({ searchRef, loadVideos, handleVideoSelect }) => {
   let videoListShow = null;
   try {
-    if (searchRef.current.value !== null) {
+    if (
+      searchRef.current.value !== null ||
+      searchRef.current.value !== undefined
+    ) {
       let searchStr = searchRef.current.value
         ? searchRef.current.value
         : "penguins";

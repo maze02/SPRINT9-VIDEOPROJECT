@@ -13,9 +13,9 @@ const SearchBar = ({ searchRef, handleSubmit }) => {
           type="text"
           placeholder="What would you like to search today?"
           ref={searchRef}
-          onChange={handleSubmit}
         />
       </div>
+      <button onClick={handleSubmit}>Search</button>
     </div>
   );
 };
@@ -24,7 +24,7 @@ export default SearchBar;
 //won't use onChange until the end because it maximises quota
 /*x */
 /*
-<button onClick={handleSubmit}>Search</button>;
+<button onClick={handleSubmit}>Search</button>
 
 */
 /*             onChange={handleSubmit}*/

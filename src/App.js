@@ -49,9 +49,6 @@ const App = () => {
           });
       await console.log(searchStr);
       await console.log(res.data.items);
-      await setVideos((previousVideos) => {
-        return [...previousVideos, ...res.data.items];
-      });
 
       /*
       await localStorage.setItem(searchStr, JSON.stringify(res.data.items));
@@ -63,11 +60,17 @@ const App = () => {
         ) !== 0
       ) {
         await localStorage.setItem(searchStr, JSON.stringify(res.data.items));
+        await setVideos((previousVideos) => {
+          return res.data.items;
+        });
       } else {
         await localStorage.setItem(
           searchStr,
           JSON.stringify([...videos, ...res.data.items])
         );
+        await setVideos((previousVideos) => {
+          return [...previousVideos, ...res.data.items];
+        });
       }
 
       setVideoSearchErr((prev) => {
