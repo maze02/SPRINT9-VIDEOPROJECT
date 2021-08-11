@@ -3,15 +3,15 @@ import VideoItem from "./VideoItem";
 const VideoList = ({ searchRef, loadVideos, handleVideoSelect }) => {
   let videoListShow = null;
   try {
-    if (!loadVideos && searchRef.current.value !== null) {
+    if (searchRef.current.value !== null) {
       let searchStr = searchRef.current.value
         ? searchRef.current.value
         : "penguins";
       let videoListArr = JSON.parse(localStorage.getItem(searchStr));
-      videoListShow = videoListArr.map((e) => {
+      videoListShow = videoListArr.map((e, index) => {
         return (
           <VideoItem
-            key={e.snippet.title}
+            key={index}
             id={e.id.videoId}
             title={e.snippet.title}
             description={e.snippet.description}
@@ -27,7 +27,7 @@ const VideoList = ({ searchRef, loadVideos, handleVideoSelect }) => {
   }
   return (
     <div className="videolist-wrapper">
-      <h3>VideoList component</h3>
+      <h3>Related Videos</h3>
       {loadVideos && <p>Loading videoList...</p>}
       {!loadVideos && videoListShow !== null && videoListShow}
     </div>

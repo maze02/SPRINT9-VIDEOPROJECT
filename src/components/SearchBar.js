@@ -15,7 +15,6 @@ const SearchBar = ({ searchRef, handleSubmit }) => {
           ref={searchRef}
         />
       </div>
-      <button onClick={handleSubmit}>Search</button>;
     </div>
   );
 };
@@ -25,5 +24,6 @@ export default SearchBar;
 /*x */
 /*
 <button onClick={handleSubmit}>Search</button>;
+
 */
 /*             onChange={handleSubmit}*/

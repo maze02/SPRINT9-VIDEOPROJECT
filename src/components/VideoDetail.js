@@ -16,18 +16,16 @@ const VideoDetail = ({ loadVideos, selectId, selectedVideo }) => {
   }
 
   return (
-    <div className="videodetail-card">
+    <article className="video-detail-component">
       {!loadVideos && (
-        <div>
-          <h4>VideoDetail component</h4>
-
+        <div className="videodetail-card">
           <div className="video-thumbnail">
             <iframe
               src={`https://www.youtube.com/embed/${selectId}?controls=0`}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </div>
           <h5>{selectedVid.snippet.title}</h5>
@@ -36,7 +34,7 @@ const VideoDetail = ({ loadVideos, selectId, selectedVideo }) => {
         </div>
       )}
       {loadVideos && <p>video loading</p>}
-    </div>
+    </article>
   );
 };
 
