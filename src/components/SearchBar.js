@@ -13,9 +13,9 @@ const SearchBar = ({ searchRef, handleSubmit }) => {
           type="text"
           placeholder="What would you like to search today?"
           ref={searchRef}
+          onChange={handleSubmit}
         />
       </div>
-      <button onClick={handleSubmit}>Search</button>
     </div>
   );
 };
