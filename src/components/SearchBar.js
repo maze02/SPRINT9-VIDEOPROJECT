@@ -1,5 +1,6 @@
+import { useContext } from "react";
+import { VideoSearchContext } from "./store/VideoSearchCtx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 //import { FaSearch } from "react-icons/fa";
@@ -13,9 +14,9 @@ const SearchBar = ({ searchRef, handleSubmit }) => {
           type="text"
           placeholder="What would you like to search today?"
           ref={searchRef}
-          onChange={handleSubmit}
         />
       </div>
+      <button onClick={handleSubmit}>Search</button>
     </div>
   );
 };

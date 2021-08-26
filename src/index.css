@@ -10,6 +10,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body ul {
+  list-style-type: none;
+  padding: 0;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
@@ -20,7 +25,28 @@ iframe {
   height: 315px;
 }
 */
-header {
+.navLink {
+  list-style-type: none;
+  text-decoration: none !important;
+  color: black;
+}
+
+.layout {
+  background-color: blueViolet;
+}
+
+@media screen and (min-width: 578px) {
+  .layout {
+    width: 100%;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 2fr 7fr;
+        grid-template-columns: 2fr 7fr;
+    background-color: brown;
+  }
+}
+
+.section-searchbar-wrapper {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -32,7 +58,6 @@ header {
 
 .border {
   margin: 1rem 1rem 1rem 1rem !important;
-  border: 1px solid black;
 }
 
 .searchComponent {
@@ -73,6 +98,7 @@ header {
   height: 40px;
   border: 0.1rem solid black;
   color: black;
+  border-radius: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -97,16 +123,26 @@ header {
 }
 
 main {
+  background-color: lightblue;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  /*
   margin-top: 0px;
   margin: 0rem 10px 10px 10px !important;
   background-color: white;
+  */
 }
 
 .video-detail-component {
-  margin-top: 0rem !important;
   margin-left: 0.44rem;
-  padding-top: 0rem !important;
-  background-color: white;
+  border: 0.2rem solid darkgray;
+  border-radius: 1rem;
 }
 
 .videolist-wrapper {
@@ -115,13 +151,28 @@ main {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  margin-top: 0px;
+      -ms-flex-direction: horizontal;
+          flex-direction: horizontal;
+}
+
+@media screen and (min-width: 578px) {
+  .videolist-wrapper {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    max-width: 1000px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 1rem 0rem 1rem 0.4rem;
+    border: 0.2rem solid darkgray;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
 }
 
 .videodetail-card {
-  margin-top: 0rem !important;
+  border-radius: 1rem !important;
+  margin: 1rem;
+  background-color: blue;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -136,6 +187,7 @@ main {
   /*calc(100vh - 80px)*/
   /*  width: 90vw; */
   width: 100%;
+  border-radius: 0.25rem;
   position: sticky;
   -ms-overflow-style: none;
   /* for Internet Explorer, Edge */
@@ -174,7 +226,6 @@ main {
 
 .videodetail-card .description {
   margin: 1rem 1rem 1rem 0rem;
-  border: 1px solid black;
 }
 
 .videodetail-card .description h5 {
@@ -194,12 +245,40 @@ main {
 
 @media screen and (min-width: 578px) {
   .videodetail-card {
-    margin: 1rem 2rem 1rem 0rem;
+    margin: 1rem !important;
+    padding: 2rem !important;
+    width: auto;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1.3fr 1fr;
+        grid-template-columns: 1.3fr 1fr;
+    background-color: lightcyan;
     /*
      height: 800px;
     height: auto;
     max-height: 1200px;
     */
+  }
+  .videodetail-card .video-thumbnail {
+    margin: 0rem 1rem 0rem 0rem;
+    cursor: pointer;
+    overflow: hidden;
+    padding-top: 56.25%;
+    /* 16:9*/
+    position: relative;
+  }
+  .videodetail-card .video-thumbnail iframe {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    /*
+      width: 100%;
+      height: 100%;
+      border-radius: 0.25rem 0.25rem 0rem 0rem;
+      */
   }
 }
 
@@ -217,20 +296,16 @@ main {
       -ms-flex-direction: column;
           flex-direction: column;
   margin-top: 0rem !important;
-}
+  background-color: pink;
+  /*
 
-@media screen and (min-width: 578px) {
-  .section-video-wrapper {
+  @media screen and (min-width: 578px) {
     margin-top: 0rem !important;
-    display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 6fr 4fr;
-        grid-template-columns: 6fr 4fr;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    grid-template-columns: 6fr 4fr;
+    justify-content: center;
     gap: 0rem 1rem;
-  }
+  */
 }
 
 /*

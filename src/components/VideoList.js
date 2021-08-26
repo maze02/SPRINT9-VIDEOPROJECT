@@ -1,30 +1,33 @@
 import VideoItem from "./VideoItem";
+import moment from "moment";
 
-const VideoList = ({ searchRef, loadVideos, handleVideoSelect }) => {
+const VideoList = ({
+  loadVideos,
+  handleVideoSelect,
+  vidListTerm,
+  videoListType,
+}) => {
   let videoListShow = null;
   try {
-    if (
-      searchRef.current.value !== null ||
-      searchRef.current.value !== undefined
-    ) {
-      let searchStr = searchRef.current.value
-        ? searchRef.current.value
-        : "penguins";
-      let videoListArr = JSON.parse(localStorage.getItem(searchStr));
-      videoListShow = videoListArr.map((e, index) => {
-        return (
-          <VideoItem
-            key={index}
-            id={e.id.videoId}
-            title={e.snippet.title}
-            description={e.snippet.description}
-            url={e.snippet.thumbnails.medium.url}
-            date={e.snippet.publishTime}
-            handleVideoSelect={handleVideoSelect}
-          />
-        );
-      });
-    }
+    let videoListArr = JSON.parse(localStorage.getItem(vidListTerm));
+    console.log("3333-IN VIDEOLIST GETTING ViDEOS FROM LOCAL");
+    videoListShow = videoListArr.map((e, index) => {
+      return (
+        <VideoItem
+          key={index}
+          id={e.id.videoId}
+          title={e.snippet.title}
+          description={e.snippet.description}
+          url={e.snippet.thumbnails.medium.url}
+          date={moment(
+            e.snippet.publishTime.substring(0, 10).replace(/-/g, ""),
+            "YYYYMMDD"
+          ).fromNow()}
+          videoListType={videoListType}
+          handleVideoSelect={handleVideoSelect}
+        />
+      );
+    });
   } catch (error) {
     console.log(error);
   }
@@ -35,7 +38,6 @@ const VideoList = ({ searchRef, loadVideos, handleVideoSelect }) => {
     </div>
   );
 };
-
 export default VideoList;
 
 /*      <h3 className="heading3">Related Videos</h3>*/

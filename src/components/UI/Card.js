@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const CardSecondary = ({ children, id, pressed }) => {
+const CardSecondary = ({ children, id, videoListType, pressed }) => {
   const clickVideo = () => {
-    pressed(id);
+    pressed(id, videoListType);
   };
   return <Wrapper onClick={clickVideo}>{children}</Wrapper>;
 };
@@ -10,37 +10,46 @@ const CardSecondary = ({ children, id, pressed }) => {
 const Wrapper = styled.div`
   /*  width: 90vw; */
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 0.5fr;
   width: 100%;
   margin: 0rem 1rem 1rem 0rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid black;
   min-width: 200px;
-  /* background: grey;*/
-  background-color: white;
-  // border-radius: 0.25rem;
+  background-color: grey;
+  border-radius: 0.25rem;
   cursor: pointer;
+  //flex: 0 0 auto;
   img {
     width: 100%;
-    //border-radius: 0.25rem 0.25rem 0rem 0rem;
+    border-radius: 0.25rem 0.25rem 0rem 0rem;
   }
-
+  .secondary-card-text {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    margin: 0rem 1rem 0rem 1rem;
+  }
   .description-brief {
-    margin-right: 1rem;
     display: flex;
-    align-items: center;
-
+    margin-top: 0.6rem;
     h5 {
-      margin-top: 1rem;
+      margin-top: 0rem;
+      margin-bottom: 0rem;
     }
 
     p {
       margin-top: -0.7rem;
-      padding-bottom: 1rem;
+      padding-bottom: 2rem;
     }
-    h5,
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -1rem;
+    margin-bottom: -1rem;
     p {
-      padding-left: 1rem;
+      font-size: 0.8rem;
     }
   }
 `;
