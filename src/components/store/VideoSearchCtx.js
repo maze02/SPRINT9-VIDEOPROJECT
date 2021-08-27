@@ -115,13 +115,18 @@ const VideoSearchProvider = (props) => {
         await setVideos((previousVideos) => {
           return res.data.items;
         });
+        if (localStorage.getItem("historyVideos")) {
+          setHistoryVideos((prevHistoryVideos) =>
+            JSON.parse(localStorage.getItem("historyVideos"))
+          );
+        }
         await setHistoryVideos((prevHistoryVideos) => {
           return [
             ...prevHistoryVideos,
             {
               searchTermH: searchStr,
               historyVidList: res.data.items,
-              date2: moment(),
+              date: moment(),
             },
           ];
         });
@@ -193,7 +198,8 @@ const VideoSearchProvider = (props) => {
     getVideos();
   }, [nextPageToken]); //nextPageToken
 
-  //infinite scroll
+  /*
+  /////////////////////////////////infinite scroll
   useEffect(() => {
     const event = window.addEventListener("scroll", () => {
       // console.log(`innerHeight ${window.innerHeight}`);
@@ -215,6 +221,8 @@ const VideoSearchProvider = (props) => {
     });
     return () => window.removeEventListener("scroll", event);
   }, []);
+
+  //////////////////////////////infinite scroll*/
 
   //get default load from firestore?
   useEffect(() => {

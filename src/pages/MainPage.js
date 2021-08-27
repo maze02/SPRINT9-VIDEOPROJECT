@@ -93,20 +93,24 @@ const MainPage = () => {
           <SearchBar searchRef={searchRef} handleSubmit={handleSubmit} />
         </div>
       </section>
-
-      {videoSearchErr.status && (
-        <h2 className="text-center">Error. Please try again later.</h2>
-      )}
-      {!videoSearchErr.status && (
-        <section className="section-video-wrapper">
+      <section className="section-video-wrapper">
+        <h2>Recommended Videos</h2>
+        {videoSearchErr.status && (
+          <h3 className="text-center">Error. Please try again later.</h3>
+        )}
+        {!videoSearchErr.status && (
           <VideoList
             loadVideos={loadVideosL}
             handleVideoSelect={handleVideoSelect}
             vidListTerm={vidListTerm}
             videoListType="videos"
           />
-        </section>
-      )}
+        )}
+      </section>
+
+      <section>
+        <h2>Last searches</h2>
+      </section>
     </Fragment>
   );
 };

@@ -1,3 +1,4 @@
+import moment from "moment";
 import CardTertiary from "../components/UI/TertiaryCard";
 
 const CondensedHistoryItem = ({ url, searchTerm, date }) => {
@@ -8,9 +9,13 @@ const CondensedHistoryItem = ({ url, searchTerm, date }) => {
           <img src={url} alt={searchTerm} />
         </div>
         <div className="history-text">
-          <h4>{searchTerm}</h4>
-          <p>4 days ago</p>
-          <p>{date}</p>
+          <h4>{searchTerm} &#183;</h4>
+          <p>
+            {moment(
+              date.substring(0, 19).replace("T", " "),
+              "YYYY-MM-DD hh:mm:ss"
+            ).fromNow()}
+          </p>
         </div>
       </article>
 
@@ -22,3 +27,5 @@ const CondensedHistoryItem = ({ url, searchTerm, date }) => {
 };
 
 export default CondensedHistoryItem;
+
+//  {moment("2021-08-27 11:20:10", "YYYY-MM-DD hh:mm:ss").fromNow()}

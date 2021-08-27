@@ -58,7 +58,7 @@ const Wrapper = styled.div`
       align-items: center;
       margin-left: 1rem;
       h4 {
-        margin-right: 1rem;
+        margin-right: 0.3rem;
       }
     }
   }
