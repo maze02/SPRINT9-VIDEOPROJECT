@@ -2,6 +2,7 @@ import { createContext, useState, useEffect, useRef, useCallback } from "react";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 //import { useLocation } from "react-router";
 import axios from "axios";
+import moment from "moment";
 
 const VideoSearchProvider = (props) => {
   let searchTerm = localStorage.getItem("searchItem")
@@ -25,6 +26,10 @@ const VideoSearchProvider = (props) => {
     status: false,
     errLog: [],
   });
+  const [historyVideos, setHistoryVideos] = useState([]);
+  //const [historyVideos, setHistoryVideos] = useState([
+  //  { searchTermH: "", historyVidList: [] },
+  //]);
   const [loadSelVideo, setLoadSelVideo] = useState(false);
   const [selVidErr, setSelVidErr] = useState(false);
 
@@ -51,10 +56,10 @@ const VideoSearchProvider = (props) => {
 
   const getVideos = async () => {
     console.log("2nd LOAD VIDEOS AFTER REFRESH CHECK");
-    let apiKey0 = `${process.env.REACT_APP_ACCESS_KEY1}`;
+    let apiKey = `${process.env.REACT_APP_ACCESS_KEY1}`;
     let apiKey1 = `${process.env.REACT_APP_ACCESS_KEY2}`;
     let apiKey3 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
-    let apiKey = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
+    let apiKey0 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
     console.log(
       "location.pathname before history.push=" + location.pathname.substring(1)
     );
@@ -110,6 +115,28 @@ const VideoSearchProvider = (props) => {
         await setVideos((previousVideos) => {
           return res.data.items;
         });
+        await setHistoryVideos((prevHistoryVideos) => {
+          return [
+            ...prevHistoryVideos,
+            {
+              searchTermH: searchStr,
+              historyVidList: res.data.items,
+              date2: moment(),
+            },
+          ];
+        });
+
+        await localStorage.setItem(
+          "historyVideos",
+          JSON.stringify([
+            ...historyVideos,
+            {
+              searchTermH: searchStr,
+              historyVidList: res.data.items,
+              date: moment(),
+            },
+          ])
+        );
       } else {
         //Scenario that the new pagetoken is added but have the same searchtern
         await localStorage.setItem(

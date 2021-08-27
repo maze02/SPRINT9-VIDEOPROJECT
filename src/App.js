@@ -20,8 +20,6 @@ const App = () => {
         <VideoDetailProvider>
           <Layout>
             <Switch>
-              <Route path="/" component={MainPage} exact></Route>
-              <Route path="/:searchTerm" component={MainPage} exact></Route>
               <Route
                 path="/videodetail/:videoId"
                 component={VideoDetailPage}
@@ -32,6 +30,8 @@ const App = () => {
                 path="/developer"
                 component={DevelopersConsolePage}
               ></Route>
+              <Route path="/" component={MainPage} exact></Route>
+              <Route path="/:searchTerm" component={MainPage} exact></Route>
             </Switch>
           </Layout>
         </VideoDetailProvider>
