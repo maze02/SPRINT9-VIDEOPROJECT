@@ -4,6 +4,7 @@ import { Fragment, useContext } from "react";
 import { VideoSearchContext } from "../components/store/VideoSearchCtx";
 import { VideoDetailContext } from "../components/store/VideoDetailCtx";
 //COMPONENT IMPORTS
+import CondensedHistoryList from "../components/CondensedHistoryList";
 import SearchBar from "../components/SearchBar";
 import VideoList from "../components/VideoList";
 
@@ -93,26 +94,40 @@ const MainPage = () => {
           <SearchBar searchRef={searchRef} handleSubmit={handleSubmit} />
         </div>
       </section>
-      <section className="section-video-wrapper">
-        <h2>Recommended Videos</h2>
-        {videoSearchErr.status && (
-          <h3 className="text-center">Error. Please try again later.</h3>
-        )}
-        {!videoSearchErr.status && (
+
+      {videoSearchErr.status && (
+        <h3 className="text-center">Error. Please try again later.</h3>
+      )}
+
+      {!videoSearchErr.status && (
+        <section className="section-video-wrapper">
+          <h2>Recommended Videos</h2>
           <VideoList
             loadVideos={loadVideosL}
             handleVideoSelect={handleVideoSelect}
             vidListTerm={vidListTerm}
             videoListType="videos"
           />
-        )}
-      </section>
+        </section>
+      )}
 
-      <section>
-        <h2>Last searches</h2>
-      </section>
+      <div className="main-history-favorites-wrapper">
+        <section className="searches-wrapper">
+          <h2>Last searches</h2>
+          <CondensedHistoryList />
+        </section>
+        <section className="searches-wrapper">
+          <h2>Favorites</h2>
+          <CondensedHistoryList />
+        </section>
+      </div>
     </Fragment>
   );
 };
 
 export default MainPage;
+
+/*
+
+
+*/

@@ -1,6 +1,16 @@
 .root {
   margin: 0;
 }
+
+$border-default: 0.2rem solid darkgray;
+
+.border-styled-default {
+  border: $border-default;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem 0rem 1rem 0.4rem;
+}
+
 body {
   margin: 0rem 5rem 1rem 5rem !important;
   ul {
@@ -118,17 +128,19 @@ main {
   margin-left: 0.44rem;
   //padding-top: 0rem !important;
   //background-color: purple;
-  border: 0.2rem solid darkgray;
+  border: $border-default;
   border-radius: 1rem;
 }
 
 .videolist-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: horizontal;
+  @extend .border-styled-default;
   //margin-top: 0px;
-
+  //background-color: yellow;
+  overflow-x: hidden;
   @media screen and (min-width: 578px) {
-    flex-direction: horizontal;
+    flex-direction: horizontal !important;
     flex-wrap: nowrap;
     max-width: 1000px;
     //width: auto;
@@ -144,11 +156,7 @@ main {
     //-ms-overflow-style: none; /* for Internet Explorer, Edge */
     // scrollbar-width: none; /* for Firefox */
 
-    //background-color: yellow;
-    margin: 1rem 0rem 1rem 0.4rem;
-    border: 0.2rem solid darkgray;
-    padding: 1rem;
-    border-radius: 1rem;
+    //background-color: green;
   }
 }
 
@@ -264,11 +272,13 @@ main {
   margin-top: 0px;
   padding-top: 0px;
 }
+
 .section-video-wrapper {
   display: flex;
   flex-direction: column;
   margin-top: 0rem !important;
-  background-color: pink;
+  background-color: yellow;
+  @extend .border-styled-default;
   /*
 
   @media screen and (min-width: 578px) {
@@ -280,6 +290,14 @@ main {
   */
 }
 
+.main-history-favorites-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1rem;
+}
+.searches-wrapper {
+  @extend .border-styled-default;
+}
 /*
  display: -webkit-box;
   display: -ms-flexbox;

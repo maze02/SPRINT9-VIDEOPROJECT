@@ -1,6 +1,8 @@
 import CardSecondary from "./UI/Card";
+import { useContext, useEffect } from "react";
+import { FavoritesContext } from "./store/FavoritesCtx";
+import { VideoSearchContext } from "../components/store/VideoSearchCtx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
 const VideoItem = ({
@@ -11,7 +13,11 @@ const VideoItem = ({
   videoListType,
   url,
   date,
+  favorite,
 }) => {
+  const { buttonHeart } = useContext(VideoSearchContext);
+  const { favorites, toggleFavorite } = useContext(FavoritesContext);
+
   return (
     <CardSecondary
       id={id}
@@ -28,8 +34,16 @@ const VideoItem = ({
         </div>
         <div className="card-footer">
           <p>{date}</p>
-
-          <FontAwesomeIcon className="heart" icon={farHeart} />
+          <div
+            onClick={() => {
+              console.log("YO YO YO id " + id);
+              toggleFavorite(id);
+            }}
+            className="button-heart"
+          >
+            {favorite && <FontAwesomeIcon className="heart" icon={faHeart} />}
+            {!favorite && <FontAwesomeIcon className="heart" icon={farHeart} />}
+          </div>
         </div>
       </div>
     </CardSecondary>

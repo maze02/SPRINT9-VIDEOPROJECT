@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
 const CardSecondary = ({ children, id, videoListType, pressed }) => {
-  const clickVideo = () => {
-    pressed(id, videoListType);
+  const clickVideo = (e) => {
+    console.log("91919191919-ID of CLICK" + e.target.tagName);
+    localStorage.setItem("e.target", e.target.tagName);
+    if (e.target.tagName !== "svg" && e.target.tagName !== "path") {
+      pressed(id, videoListType);
+    }
   };
   return <Wrapper onClick={clickVideo}>{children}</Wrapper>;
 };
@@ -15,7 +19,7 @@ const Wrapper = styled.div`
   margin: 0rem 1rem 1rem 0rem;
   padding-bottom: 1rem;
   min-width: 200px;
-  background-color: grey;
+  background-color: white;
   border-radius: 0.25rem;
   cursor: pointer;
   //flex: 0 0 auto;
@@ -51,6 +55,11 @@ const Wrapper = styled.div`
     p {
       font-size: 0.8rem;
     }
+  }
+
+  .button-heart {
+    color: red;
+    z-index: 10;
   }
 `;
 

@@ -3,6 +3,7 @@ import moment from "moment";
 
 const CondensedHistoryList = () => {
   let videoListShow = null;
+
   try {
     let videoListArr = JSON.parse(localStorage.getItem("historyVideos"));
     if (videoListArr) {

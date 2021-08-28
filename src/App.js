@@ -3,6 +3,8 @@ import { Route, Switch } from "react-router";
 //CONTEXT
 import VideoSearchProvider from "./components/store/VideoSearchCtx";
 import VideoDetailProvider from "./components/store/VideoDetailCtx";
+import HistoryProvider from "./components/store/HistoryCtx";
+import FavoritesProvider from "./components/store/FavoritesCtx";
 //REACT & COMPONENTS IMPORT
 import Layout from "./layout/Layout";
 import DevelopersConsolePage from "./pages/DevelopersConsolePage";
@@ -18,22 +20,26 @@ const App = () => {
     <Fragment>
       <VideoSearchProvider>
         <VideoDetailProvider>
-          <Layout>
-            <Switch>
-              <Route
-                path="/videodetail/:videoId"
-                component={VideoDetailPage}
-              ></Route>
-              <Route path="/favorites" component={FavoritesPage}></Route>
-              <Route path="/history" component={HistoryPage}></Route>
-              <Route
-                path="/developer"
-                component={DevelopersConsolePage}
-              ></Route>
-              <Route path="/" component={MainPage} exact></Route>
-              <Route path="/:searchTerm" component={MainPage} exact></Route>
-            </Switch>
-          </Layout>
+          <FavoritesProvider>
+            <HistoryProvider>
+              <Layout>
+                <Switch>
+                  <Route
+                    path="/videodetail/:videoId"
+                    component={VideoDetailPage}
+                  ></Route>
+                  <Route path="/favorites" component={FavoritesPage}></Route>
+                  <Route path="/history" component={HistoryPage}></Route>
+                  <Route
+                    path="/developer"
+                    component={DevelopersConsolePage}
+                  ></Route>
+                  <Route path="/" component={MainPage} exact></Route>
+                  <Route path="/:searchTerm" component={MainPage} exact></Route>
+                </Switch>
+              </Layout>
+            </HistoryProvider>
+          </FavoritesProvider>
         </VideoDetailProvider>
       </VideoSearchProvider>
     </Fragment>

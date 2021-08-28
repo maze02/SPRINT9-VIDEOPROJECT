@@ -14,6 +14,7 @@ const VideoSearchProvider = (props) => {
   //const { searchTerm } = useParams();
   const [refreshMain, setRefreshMain] = useState(true);
   const searchRef = useRef();
+  const buttonHeart = useRef("heart");
   const [searchItem, setSearchItem] = useState(searchTerm);
   console.log("11111" + searchItem);
   console.log("Eiiiiiii searchItem" + localStorage.getItem("searchItem"));
@@ -266,6 +267,7 @@ const VideoSearchProvider = (props) => {
   return (
     <VideoSearchContext.Provider
       value={{
+        buttonHeart: buttonHeart,
         videos: videos,
         loadVideos: loadVideos,
         selectId: selectId,

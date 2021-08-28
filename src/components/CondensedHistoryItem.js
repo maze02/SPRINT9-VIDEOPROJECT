@@ -1,11 +1,14 @@
 import moment from "moment";
+import { useContext } from "react";
 import CardTertiary from "../components/UI/TertiaryCard";
+import { HistoryContext } from "./store/HistoryCtx";
 
 const CondensedHistoryItem = ({ url, searchTerm, date }) => {
+  const { handleViewHistory } = useContext(HistoryContext);
   return (
     <CardTertiary>
       <article className="history-info">
-        <div class="image-cropper">
+        <div className="image-cropper">
           <img src={url} alt={searchTerm} />
         </div>
         <div className="history-text">
@@ -20,7 +23,13 @@ const CondensedHistoryItem = ({ url, searchTerm, date }) => {
       </article>
 
       <div className="button-wrapper">
-        <button>View videos</button>
+        <button
+          onClick={() => {
+            handleViewHistory(searchTerm);
+          }}
+        >
+          View videos
+        </button>
       </div>
     </CardTertiary>
   );
