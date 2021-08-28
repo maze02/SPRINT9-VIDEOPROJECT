@@ -10,17 +10,18 @@ const FavoritesProvider = (props) => {
 
   const history = useHistory();
 
-  const toggleFavorite = (videoId) => {
-    console.log("WOOOO-inside toggler");
+  const toggleFavorite = (videoId, videoListP, videoListState) => {
     let favoritesL = localStorage.getItem("favorites")
       ? JSON.parse(localStorage.getItem("favorites"))
       : null;
-
+    let videoListArr = videoListState
+      ? videoListState
+      : JSON.parse(localStorage.getItem(videoListP));
     //if favorites exist - might be adding or removing it from favs
     if (favoritesL) {
       //checking video is in favorites
       const res = favoritesL.findIndex(
-        (element) => element.localeCompare(videoId) === 0
+        (element) => element.id.videoId.localeCompare(videoId) === 0
       );
       if (res !== -1) {
         //if it is, remove from favs
@@ -29,38 +30,24 @@ const FavoritesProvider = (props) => {
         localStorage.setItem("favorites", JSON.stringify(favoritesL));
       } else {
         //if it isn't, add to favorites
-        favoritesL.push(videoId);
+        //find index of item with id clicked on in the videoList in question//
+        const j = videoListArr.findIndex(
+          (element) => element.id.videoId.localeCompare(videoId) === 0
+        );
+        favoritesL.push(videoListArr[j]);
         setFavorites((prev) => favoritesL);
         localStorage.setItem("favorites", JSON.stringify(favoritesL));
       }
     } else {
       //if favorites not exist - adding to favs
-      setFavorites([videoId]);
-      localStorage.setItem("favorites", JSON.stringify([videoId]));
+      const j = videoListArr.findIndex(
+        (element) => element.id.videoId.localeCompare(videoId) === 0
+      );
+      setFavorites((prev) => [videoListArr[j]]);
+      localStorage.setItem("favorites", JSON.stringify([videoListArr[j]]));
     }
   };
 
-  /*
-  //check if favorites is true & only if true, run check
-  if (favoritesL) {
-    //checking video is in favorites
-    const favoritesArr = JSON.parse(favoritesL);
-    const isFavorites = (element) => element.localeCompare(id);
-    const res = favoritesArr.findIndex(isFavorites);
-    if (res !== -1) {
-      //only if video is favorites, render heartContent as solid
-      heartContent = <FontAwesomeIcon className="heart" icon={faHeart} />;
-    }
-  }
-  */
-
-  /*
-  useEffect(
-    ()=>{
-
-    },[favorites]
-  )
-  */
   return (
     <FavoritesContext.Provider
       value={{
@@ -113,3 +100,25 @@ export const FavoritesContext = createContext();
   };
 
 */
+
+/*
+  //check if favorites is true & only if true, run check
+  if (favoritesL) {
+    //checking video is in favorites
+    const favoritesArr = JSON.parse(favoritesL);
+    const isFavorites = (element) => element.localeCompare(id);
+    const res = favoritesArr.findIndex(isFavorites);
+    if (res !== -1) {
+      //only if video is favorites, render heartContent as solid
+      heartContent = <FontAwesomeIcon className="heart" icon={faHeart} />;
+    }
+  }
+  */
+
+/*
+  useEffect(
+    ()=>{
+
+    },[favorites]
+  )
+  */

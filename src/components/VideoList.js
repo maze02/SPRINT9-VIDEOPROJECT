@@ -1,6 +1,7 @@
 import VideoItem from "./VideoItem";
+import FavoritesItem from "./FavoritesItem";
 import moment from "moment";
-import { useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { FavoritesContext } from "./store/FavoritesCtx";
 
 const VideoList = ({
@@ -8,11 +9,13 @@ const VideoList = ({
   handleVideoSelect,
   vidListTerm,
   videoListType,
+  videoListState,
 }) => {
   const { favorites } = useContext(FavoritesContext);
   let videoListShow = null;
   let favoritesArr = [];
   let favoritesL = localStorage.getItem("favorites");
+  let videoListArr = JSON.parse(localStorage.getItem(vidListTerm));
   if (favoritesL) {
     //checking video is in favorites
     favoritesArr = JSON.parse(favoritesL);
@@ -20,13 +23,15 @@ const VideoList = ({
 
   try {
     useEffect(() => {}, [favorites]);
-    let videoListArr = JSON.parse(localStorage.getItem(vidListTerm));
+    //let videoListArr = JSON.parse(localStorage.getItem(vidListTerm));
     let favoriteStatus = false;
+
     const favoriteCheck = (id, favoritesLP, favoritesArrP) => {
       let favoriteStatus = false;
       if (favoritesLP) {
         //checking video is in favorites
-        const isFavorites = (element) => element.localeCompare(id) === 0;
+        const isFavorites = (element) =>
+          element.id.videoId.localeCompare(id) === 0;
         const res = favoritesArrP.findIndex(isFavorites);
         favoriteStatus = res !== -1 ? true : false;
       }
@@ -35,21 +40,16 @@ const VideoList = ({
 
     for (let i = 0; i < videoListArr.length; i++) {
       if (videoListArr[i].favoriteStatus === undefined) {
-        console.log("I'm a penguin");
+        //video check run here
         let resFav = favoriteCheck(
           videoListArr[i].id.videoId,
           favoritesL,
           favoritesArr
         );
         videoListArr[i].favoriteStatus = resFav;
-        console.log(
-          "video id =" +
-            videoListArr[i].id.videoId +
-            ", favorite status =" +
-            videoListArr[i].favoriteStatus
-        );
       }
     }
+
     videoListShow = videoListArr.map((e, index) => {
       return (
         <VideoItem
@@ -62,6 +62,7 @@ const VideoList = ({
             e.snippet.publishTime.substring(0, 10).replace(/-/g, ""),
             "YYYYMMDD"
           ).fromNow()}
+          videoListState={videoListState}
           videoListType={videoListType}
           handleVideoSelect={handleVideoSelect}
           favorite={e.favoriteStatus}
@@ -70,6 +71,33 @@ const VideoList = ({
     });
   } catch (error) {
     console.log(error);
+  }
+  if (videoListType === "favorites") {
+    videoListShow = videoListArr.map((e, index) => {
+      return (
+        <FavoritesItem
+          key={index}
+          id={e.id.videoId}
+          title={e.snippet.title}
+          description={e.snippet.description}
+          url={e.snippet.thumbnails.medium.url}
+          date={moment(
+            e.snippet.publishTime.substring(0, 10).replace(/-/g, ""),
+            "YYYYMMDD"
+          ).fromNow()}
+          videoListState={videoListState}
+          videoListType={videoListType}
+          handleVideoSelect={handleVideoSelect}
+          favorite={e.favoriteStatus}
+        />
+      );
+    });
+
+    return (
+      <Fragment>
+        {loadVideos && videoListShow !== null && videoListShow}
+      </Fragment>
+    );
   }
   return (
     <div className="videolist-wrapper">
@@ -81,3 +109,12 @@ const VideoList = ({
 export default VideoList;
 
 /*      <h3 className="heading3">Related Videos</h3>*/
+
+/*
+console.log(
+          "video id =" +
+            videoListArr[i].id.videoId +
+            ", favorite status =" +
+            videoListArr[i].favoriteStatus
+        );
+*/

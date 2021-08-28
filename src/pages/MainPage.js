@@ -3,6 +3,7 @@ import { Fragment, useContext } from "react";
 //CONTEXT IMPORTS
 import { VideoSearchContext } from "../components/store/VideoSearchCtx";
 import { VideoDetailContext } from "../components/store/VideoDetailCtx";
+import { FavoritesContext } from "../components/store/FavoritesCtx";
 //COMPONENT IMPORTS
 import CondensedHistoryList from "../components/CondensedHistoryList";
 import SearchBar from "../components/SearchBar";
@@ -22,6 +23,7 @@ const MainPage = () => {
     setNextPageToken,
     setLoadVideos,
   } = useContext(VideoSearchContext);
+  const { favorites } = useContext(FavoritesContext);
   const { handleVideoSelect } = useContext(VideoDetailContext);
 
   let vidListTerm = searchItem ? searchItem : "penguins";
@@ -107,6 +109,7 @@ const MainPage = () => {
             handleVideoSelect={handleVideoSelect}
             vidListTerm={vidListTerm}
             videoListType="videos"
+            videoListState={videos}
           />
         </section>
       )}
@@ -117,8 +120,16 @@ const MainPage = () => {
           <CondensedHistoryList />
         </section>
         <section className="searches-wrapper">
-          <h2>Favorites</h2>
-          <CondensedHistoryList />
+          <h2>Favorites videos &#183; {favorites.length}</h2>
+          <div className="favorites-main-view">
+            <VideoList
+              loadVideos={true}
+              handleVideoSelect={handleVideoSelect}
+              vidListTerm="favorites"
+              videoListType="favorites"
+              videoListState={favorites}
+            />
+          </div>
         </section>
       </div>
     </Fragment>

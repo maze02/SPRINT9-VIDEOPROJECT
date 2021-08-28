@@ -31,6 +31,7 @@ const VideoDetailPage = () => {
             handleVideoSelect={handleVideoSelect}
             vidListTerm="relatedVideos"
             videoListType="relatedVideos"
+            videoListState={relatedVideos}
           />
         </section>
       )}

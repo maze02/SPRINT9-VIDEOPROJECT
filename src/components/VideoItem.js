@@ -10,6 +10,7 @@ const VideoItem = ({
   title,
   handleVideoSelect,
   description,
+  videoListState,
   videoListType,
   url,
   date,
@@ -37,7 +38,7 @@ const VideoItem = ({
           <div
             onClick={() => {
               console.log("YO YO YO id " + id);
-              toggleFavorite(id);
+              toggleFavorite(id, videoListType, videoListState);
             }}
             className="button-heart"
           >
