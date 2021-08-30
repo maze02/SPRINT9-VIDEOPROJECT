@@ -38,3 +38,9 @@ const CondensedHistoryItem = ({ url, searchTerm, date }) => {
 export default CondensedHistoryItem;
 
 //  {moment("2021-08-27 11:20:10", "YYYY-MM-DD hh:mm:ss").fromNow()}
+/*
+moment(
+  date.substring(0, 19).replace("T", " "),
+  "YYYY-MM-DD hh:mm:ss"
+).fromNow();
+*/

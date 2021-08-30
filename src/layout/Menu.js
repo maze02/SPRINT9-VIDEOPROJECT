@@ -34,7 +34,7 @@ const Menu = () => {
           <li>
             <NavLink to="/favorites" className="navLink">
               <FontAwesomeIcon icon={faHeart} />
-              Liked Videos
+              Favorites
             </NavLink>
           </li>
           <li>

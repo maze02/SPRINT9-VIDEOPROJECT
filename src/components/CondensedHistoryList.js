@@ -7,6 +7,14 @@ const CondensedHistoryList = () => {
   try {
     let videoListArr = JSON.parse(localStorage.getItem("historyVideos"));
     if (videoListArr) {
+      //removing first item that is placed when loaded for refresh comparison in videoSearchCtx so searchTerm is not undefined in videoSearchCtx
+      if (
+        videoListArr[videoListArr.length - 1].searchTermH.localeCompare(
+          "1919"
+        ) === 0
+      ) {
+        videoListArr.pop();
+      }
       videoListShow = videoListArr.map((e, index) => {
         return (
           <CondensedHistoryItem

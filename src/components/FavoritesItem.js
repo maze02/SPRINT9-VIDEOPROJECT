@@ -37,7 +37,6 @@ const FavoritesItem = ({
           <div
             className="link trash"
             onClick={() => {
-              console.log("YO YO YO id " + id);
               toggleFavorite(id, videoListType, videoListState);
             }}
           >
@@ -50,6 +49,8 @@ const FavoritesItem = ({
 };
 
 const Wrapper = styled.article`
+  align-self: center;
+  justify-self: center;
   .container {
     position: relative;
     background: var(--clr-black);

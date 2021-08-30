@@ -9,22 +9,45 @@ import VideoDetail from "../components/VideoDetail";
 import VideoList from "../components/VideoList";
 const HistoryPage = () => {
   const { selectedHistory } = useContext(HistoryContext);
-  const { handleVideoSelect } = useContext(VideoDetailContext);
+  const { lastViewed, historyMix, handleVideoSelect } =
+    useContext(VideoDetailContext);
+
   return (
-    <Fragment>
-      <h1>List of videos for last search: "{selectedHistory}"</h1>
-      {
-        <section className="section-video-wrapper">
+    <div className="page-container">
+      <h1>History</h1>
+      <h2>Last viewed</h2>
+      {lastViewed && (
+        <section>
           <VideoList
             loadVideos={false}
             handleVideoSelect={handleVideoSelect}
-            vidListTerm={selectedHistory}
-            videoListType={selectedHistory}
+            vidListTerm="lastViewed"
+            videoListType="lastViewed"
+            vidListState={lastViewed}
           />
         </section>
-      }
-      ;
-    </Fragment>
+      )}
+      {!lastViewed && (
+        <p>Not viewed any videos yet. Click on one to see one in detail.</p>
+      )}
+      <h2>Searches Video Mix &#183; Two videos per search term</h2>
+      {lastViewed && (
+        <section>
+          <VideoList
+            loadVideos={false}
+            handleVideoSelect={handleVideoSelect}
+            vidListTerm="historyMix"
+            videoListType="historyMix"
+            vidListState={historyMix}
+          />
+        </section>
+      )}
+      {!lastViewed && (
+        <p>Not searched any videos yet. Click on one to see one in detail.</p>
+      )}
+      <h2>Terms Searched</h2>
+      <CondensedHistoryList />
+    </div>
   );
 };
 

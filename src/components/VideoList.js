@@ -22,8 +22,8 @@ const VideoList = ({
   }
 
   try {
-    useEffect(() => {}, [favorites]);
-    //let videoListArr = JSON.parse(localStorage.getItem(vidListTerm));
+    //useEffect(() => {}, [favorites]);
+    videoListArr = JSON.parse(localStorage.getItem(vidListTerm));
     let favoriteStatus = false;
 
     const favoriteCheck = (id, favoritesLP, favoritesArrP) => {
@@ -37,19 +37,19 @@ const VideoList = ({
       }
       return favoriteStatus;
     };
-
-    for (let i = 0; i < videoListArr.length; i++) {
-      if (videoListArr[i].favoriteStatus === undefined) {
-        //video check run here
-        let resFav = favoriteCheck(
-          videoListArr[i].id.videoId,
-          favoritesL,
-          favoritesArr
-        );
-        videoListArr[i].favoriteStatus = resFav;
+    if (videoListArr) {
+      for (let i = 0; i < videoListArr.length; i++) {
+        if (videoListArr[i].favoriteStatus === undefined) {
+          //video check run here
+          let resFav = favoriteCheck(
+            videoListArr[i].id.videoId,
+            favoritesL,
+            favoritesArr
+          );
+          videoListArr[i].favoriteStatus = resFav;
+        }
       }
     }
-
     videoListShow = videoListArr.map((e, index) => {
       return (
         <VideoItem
@@ -72,7 +72,8 @@ const VideoList = ({
   } catch (error) {
     console.log(error);
   }
-  if (videoListType === "favorites") {
+  //handling favorites
+  if (videoListType === "favorites" && favoritesL) {
     videoListShow = videoListArr.map((e, index) => {
       return (
         <FavoritesItem
@@ -98,11 +99,21 @@ const VideoList = ({
         {loadVideos && videoListShow !== null && videoListShow}
       </Fragment>
     );
+  } else {
+    loadVideos = false;
   }
   return (
     <div className="videolist-wrapper">
       {loadVideos && <p>Loading videoList...</p>}
       {!loadVideos && videoListShow !== null && videoListShow}
+      {!loadVideos &&
+        videoListShow === null &&
+        videoListType === "favorites" && (
+          <p>
+            No Favorites added yet. Click on the heart icon of the videos to
+            add.
+          </p>
+        )}
     </div>
   );
 };

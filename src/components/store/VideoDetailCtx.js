@@ -5,6 +5,10 @@ import { VideoSearchContext } from "./VideoSearchCtx";
 
 // /videodetail/:videoId
 const VideoDetailProvider = (props) => {
+  let lastViewedL = localStorage.getItem("lastViewed");
+  let lastViewedArr = lastViewedL ? JSON.parse(lastViewedL) : [];
+
+  const [lastViewed, setLastViewed] = useState(lastViewedArr);
   // let relaVid = localStorage.getItem("relatedVideos")
   // ? JSON.parse(localStorage.getItem("relatedVideos"))
   //   : [];
@@ -46,21 +50,24 @@ const VideoDetailProvider = (props) => {
 
   const handleVideoSelect = (id, videoListType) => {
     setRefreshDetailPg((prev) => false); //not refreshing, clicking
+
     localStorage.setItem("refreshDetailPg", "false");
     setSelectId((prev) => id);
     localStorage.setItem("selectId", JSON.stringify(id));
+
     //handling page being refreshed
     let vidId = localStorage.getItem("selectId");
     let videoListP = JSON.parse(localStorage.getItem(videoListType));
-    console.log("id = " + id);
-    console.log("videoListType =" + videoListType);
-
     let selectItem = null;
+
     for (let i = 0; i < videoListP.length; i++) {
       if (id.localeCompare(videoListP[i].id.videoId) === 0) {
         selectItem = videoListP[i];
         setSelectedVideo((prev) => selectItem);
         localStorage.setItem("selectedVideo", JSON.stringify(selectItem));
+        lastViewedArr.unshift(selectItem);
+        localStorage.setItem("lastViewed", JSON.stringify(lastViewedArr));
+        setLastViewed((prev) => lastViewedArr);
       }
     }
     getRelVideos(id);
@@ -94,10 +101,10 @@ const VideoDetailProvider = (props) => {
 */
   const getRelVideos = async (videoId) => {
     console.log("222222- refreshDetailpg Status " + refreshDetailPg);
-    let apiKey1 = `${process.env.REACT_APP_ACCESS_KEY1}`;
-    let apiKey = `${process.env.REACT_APP_ACCESS_KEY2}`;
-    let apiKey3 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
-    let apiKey0 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
+    let apiKey = `${process.env.REACT_APP_ACCESS_KEY1}`;
+    let apiKey3 = `${process.env.REACT_APP_ACCESS_KEY2}`;
+    let apiKey0 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
+    let apiKey4 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
 
     try {
       let res = nextRelPageToken
@@ -178,6 +185,7 @@ const VideoDetailProvider = (props) => {
         refreshFlag,
         refreshDetailPg,
         loadRelVideos,
+        lastViewed: lastViewed,
         videoDetailErr: videoDetailErr,
         relatedVideos: relatedVideos,
         setRefreshFlag: setRefreshFlag,

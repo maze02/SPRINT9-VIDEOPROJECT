@@ -303,6 +303,19 @@ main {
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
 }
+
+.favorites-favpage-view {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center !important;
+  align-items: center;
+  max-width: 40rem;
+  gap: 0.5rem;
+}
+
+.page-container {
+  margin: 1rem;
+}
 /*
  display: -webkit-box;
   display: -ms-flexbox;

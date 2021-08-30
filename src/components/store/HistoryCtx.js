@@ -2,11 +2,12 @@ import { createContext, useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
 const HistoryProvider = (props) => {
-  let selHistoryT = localStorage.getItem("selectedHistory")
-    ? localStorage.getItem("selectedHistory")
-    : "";
+  let selHistoryL = localStorage.getItem("selectedHistory");
+  //  let selHistoryArr = selHistoryL ? JSON.parse(selHistoryL) : "";
+  let selHistoryArr = selHistoryL ? JSON.parse(selHistoryL) : [];
+  const [selectedHistory, setSelectedHistory] = useState(selHistoryArr);
 
-  const [selectedHistory, setSelectedHistory] = useState(selHistoryT);
+  //const [selectedHistory, setSelectedHistory] = useState(selHistoryT);
 
   const history = useHistory();
 

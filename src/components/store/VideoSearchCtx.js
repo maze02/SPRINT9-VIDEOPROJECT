@@ -2,13 +2,21 @@ import { createContext, useState, useEffect, useRef, useCallback } from "react";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 //import { useLocation } from "react-router";
 import axios from "axios";
-import moment from "moment";
+import moment from "moment-timezone";
 
 const VideoSearchProvider = (props) => {
   let searchTerm = localStorage.getItem("searchItem")
     ? localStorage.getItem("searchItem")
     : "penguins";
 
+  let videosL = localStorage.getItem("videos");
+  let videosArr = videosL ? JSON.parse(videosL) : [];
+  let historyVideosL = localStorage.getItem("historyVideos");
+  let historyVideosArr = historyVideosL
+    ? JSON.parse(historyVideosL)
+    : [{ searchTermH: "1919", historyVidList: [] }];
+  let historyMixL = localStorage.getItem("historyMix");
+  let historyMixArr = historyMixL ? JSON.parse(historyMixL) : [];
   const history = useHistory();
   const location = useLocation();
   //const { searchTerm } = useParams();
@@ -16,9 +24,8 @@ const VideoSearchProvider = (props) => {
   const searchRef = useRef();
   const buttonHeart = useRef("heart");
   const [searchItem, setSearchItem] = useState(searchTerm);
-  console.log("11111" + searchItem);
-  console.log("Eiiiiiii searchItem" + localStorage.getItem("searchItem"));
-  const [videos, setVideos] = useState([]);
+
+  const [videos, setVideos] = useState(videosArr);
   const [loadVideos, setLoadVideos] = useState(true);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectId, setSelectId] = useState("");
@@ -27,10 +34,8 @@ const VideoSearchProvider = (props) => {
     status: false,
     errLog: [],
   });
-  const [historyVideos, setHistoryVideos] = useState([]);
-  //const [historyVideos, setHistoryVideos] = useState([
-  //  { searchTermH: "", historyVidList: [] },
-  //]);
+  const [historyVideos, setHistoryVideos] = useState(historyVideosArr);
+  const [historyMix, setHistoryMix] = useState(historyMixArr);
   const [loadSelVideo, setLoadSelVideo] = useState(false);
   const [selVidErr, setSelVidErr] = useState(false);
 
@@ -57,29 +62,23 @@ const VideoSearchProvider = (props) => {
 
   const getVideos = async () => {
     console.log("2nd LOAD VIDEOS AFTER REFRESH CHECK");
-    let apiKey1 = `${process.env.REACT_APP_ACCESS_KEY1}`;
-    let apiKey = `${process.env.REACT_APP_ACCESS_KEY2}`;
-    let apiKey3 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
-    let apiKey0 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
+    let apiKey = `${process.env.REACT_APP_ACCESS_KEY1}`;
+    let apiKey2 = `${process.env.REACT_APP_ACCESS_KEY2}`;
+    let apiKey0 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
+    let apiKey1 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
     console.log(
       "location.pathname before history.push=" + location.pathname.substring(1)
     );
 
     try {
       //getting videos as a result of submitting something in the search bar, therefore not as a result of refreshing.
+      let searchTerm = localStorage.getItem("searchItem")
+        ? localStorage.getItem("searchItem")
+        : "penguins";
 
-      // setRefreshMain((prev) => false);
-      //  console.log("OOOOOOHHHH setting refresh main to false : " + refreshMain);
-      //let searchLocal = localStorage.getItem("searchItem");
       let searchStr = searchRef.current.value
         ? searchRef.current.value
         : searchTerm;
-      /*
-      if (searchLocal) {
-        searchLocal = JSON.parse(localStorage.getItem("searchItem"));
-        searchStr = searchLocal;
-      } */
-
       history.push(`/${searchStr}`);
 
       let res = nextPageToken
@@ -104,6 +103,7 @@ const VideoSearchProvider = (props) => {
           });
       await console.log(searchStr);
       await console.log(res.data.items);
+
       //1st load scenario and new search term entered scenario
       if (
         videos.length === 0 ||
@@ -116,33 +116,22 @@ const VideoSearchProvider = (props) => {
         await setVideos((previousVideos) => {
           return res.data.items;
         });
-        if (localStorage.getItem("historyVideos")) {
-          setHistoryVideos((prevHistoryVideos) =>
-            JSON.parse(localStorage.getItem("historyVideos"))
-          );
-        }
-        await setHistoryVideos((prevHistoryVideos) => {
-          return [
-            ...prevHistoryVideos,
-            {
-              searchTermH: searchStr,
-              historyVidList: res.data.items,
-              date: moment(),
-            },
-          ];
-        });
 
-        await localStorage.setItem(
-          "historyVideos",
-          JSON.stringify([
-            ...historyVideos,
-            {
-              searchTermH: searchStr,
-              historyVidList: res.data.items,
-              date: moment(),
-            },
-          ])
-        );
+        if (historyVideosArr[0].searchTermH.localeCompare(searchStr) !== 0) {
+          await historyVideosArr.unshift({
+            searchTermH: searchStr,
+            historyVidList: res.data.items,
+            date: moment().tz("Europe/Madrid").format(),
+          });
+
+          await localStorage.setItem(
+            "historyVideos",
+            JSON.stringify(historyVideosArr)
+          );
+          await setHistoryVideos((prevHistoryVideos) => historyVideosArr);
+
+          await addToHistoryMix(historyVideosArr, historyMixArr, searchStr);
+        }
       } else {
         //Scenario that the new pagetoken is added but have the same searchtern
         await localStorage.setItem(
@@ -158,12 +147,6 @@ const VideoSearchProvider = (props) => {
         });
       }
 
-      setVideoSearchErr((prev) => {
-        return {
-          status: false,
-          errLog: [...videoSearchErr.errLog],
-        };
-      });
       //setting the page token corresponding the current list downloaded
       await localStorage.setItem("nextPageToken", res.data.nextPageToken);
       //setting the searchItem to the current ref or "penguins" - refresh not considered here
@@ -181,9 +164,23 @@ const VideoSearchProvider = (props) => {
       await console.log(
         "location.pathname after big code=" + location.pathname.substring(1)
       );
+
+      await setVideoSearchErr((prev) => {
+        return {
+          status: false,
+          errLog: [...videoSearchErr.errLog],
+        };
+      });
+      await localStorage.setItem(
+        "videoSearchErr",
+        JSON.stringify({
+          status: false,
+          errLog: [...videoSearchErr.errLog],
+        })
+      );
     } catch (error) {
       setLoadVideos((prev) => false);
-      console.log(error.message);
+      console.log("9999-searchctx -ERROR" + error);
       console.log(error.statusCode);
       setVideoSearchErr((prev) => {
         return {
@@ -191,7 +188,34 @@ const VideoSearchProvider = (props) => {
           errLog: [...videoSearchErr.errLog, { error }],
         };
       });
+      localStorage.setItem(
+        "videoSearchErr",
+        JSON.stringify({
+          status: true,
+          errLog: [...videoSearchErr.errLog, { error }],
+        })
+      );
     }
+  };
+
+  //adding to historyMix function
+  const addToHistoryMix = (arrHisVids, arrHisMix, searchStrP) => {
+    //checking not same searchTerm or the default searchTerm
+    console.log("AAAAA-ADDTOHISTORYMIX-READING");
+    console.log("AAAA-" + arrHisVids[0].searchTermH);
+    console.log("AAAA-arrHisMix" + arrHisMix.length);
+    //  if (arrHisVids[0].searchTermH.localeCompare(searchStrP) !== 0) {
+    arrHisMix.unshift(arrHisVids[0].historyVidList[1]);
+    arrHisMix.unshift(arrHisVids[0].historyVidList[0]);
+
+    //checking list length max 10 videos
+    if (arrHisMix.length > 10) {
+      arrHisMix.pop();
+      arrHisMix.pop();
+    }
+    localStorage.setItem("historyMix", JSON.stringify(historyMixArr));
+    setHistoryMix((prev) => historyMixArr);
+    //  }
   };
 
   //for default load and for api pagination
@@ -226,11 +250,12 @@ const VideoSearchProvider = (props) => {
   //////////////////////////////infinite scroll*/
 
   //get default load from firestore?
+  /*
   useEffect(() => {
     localStorage.setItem("videoSearchErr", JSON.stringify(videoSearchErr));
     console.log(videoSearchErr.errLog.length);
   }, [videoSearchErr]);
-
+*/
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoadVideos((prev) => true);
@@ -267,6 +292,7 @@ const VideoSearchProvider = (props) => {
   return (
     <VideoSearchContext.Provider
       value={{
+        historyMix: historyMix,
         buttonHeart: buttonHeart,
         videos: videos,
         loadVideos: loadVideos,
@@ -293,3 +319,18 @@ const VideoSearchProvider = (props) => {
 
 export default VideoSearchProvider;
 export const VideoSearchContext = createContext();
+
+/*
+ await localStorage.setItem(
+          "historyVideos",
+          JSON.stringify([
+            ...historyVideos,
+            {
+              searchTermH: searchStr,
+              historyVidList: res.data.items,
+              date: moment(),
+            },
+          ])
+        );
+
+*/

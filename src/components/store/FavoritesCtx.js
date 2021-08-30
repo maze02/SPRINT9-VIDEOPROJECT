@@ -34,7 +34,7 @@ const FavoritesProvider = (props) => {
         const j = videoListArr.findIndex(
           (element) => element.id.videoId.localeCompare(videoId) === 0
         );
-        favoritesL.push(videoListArr[j]);
+        favoritesL.unshift(videoListArr[j]);
         setFavorites((prev) => favoritesL);
         localStorage.setItem("favorites", JSON.stringify(favoritesL));
       }

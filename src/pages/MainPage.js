@@ -1,9 +1,10 @@
 import { Fragment, useContext } from "react";
-
+import moment from "moment";
 //CONTEXT IMPORTS
 import { VideoSearchContext } from "../components/store/VideoSearchCtx";
 import { VideoDetailContext } from "../components/store/VideoDetailCtx";
 import { FavoritesContext } from "../components/store/FavoritesCtx";
+
 //COMPONENT IMPORTS
 import CondensedHistoryList from "../components/CondensedHistoryList";
 import SearchBar from "../components/SearchBar";
@@ -41,55 +42,12 @@ const MainPage = () => {
     //setRefreshMain((prev) => false);
     //setLoadVideos((prev) => false);
   }
-  //let vidListTerm = JSON.parse(localStorage.getItem("searchItem"));
-  // vidListTerm = searchRef.current.value ? searchRef.current.value : "penguins";
-  /*
- if (
-    searchRef.current.value !== undefined ||
-    searchRef.current.value !== null
-  ) {
-    console.log("why you reading the condition if it doesn't apply to you");
-    vidListTerm = searchRef.current.value
-      ? searchRef.current.value
-      : "penguins";
-  }
-*/
-  /*//////////////from VideoSearchcontext
-   if (refreshMain) {
-        let searchTermL = localStorage.getItem("searchItem");
-        let vidL = JSON.parse(localStorage.getItem(searchTermL));
-        let pageTokenL = localStorage.getItem("nextPageToken");
-        setSearchItem((prev) => searchTermL);
-        setVideos((prev) => vidL);
-        setNextPageToken((prev) => pageTokenL);
-        setRefreshMain((prev) => false);
-        setLoadVideos((prev) => false);
-      } else {
-  /////
 
-
-  useEffect(() => {
-    console.log("1st REFRESH CHECK");
-    console.log("location.pathname OIIII" + location.pathname.substring(1));
-    let localSearch = localStorage.getItem("searchItem");
-    if (localSearch) {
-      console.log("localSearch :" + localSearch);
-      let res = localSearch.localeCompare(location.pathname.substring(1));
-      console.log("comparison result of local and url " + res);
-      //refresh scenario
-      if (
-        res === 0 &&
-        searchItem.localeCompare(location.pathname.substring(1))
-      ) {
-        console.log("browser was refreshed");
-        setRefreshMain((prev) => true);
-      }
-    }
-  }, [location.pathname, searchItem]);
-*/
+  //let date = moment();
   return (
     <Fragment>
       <h1>MainPage</h1>
+
       <section className="section-searchbar-wrapper">
         <div className="border">
           <h1 className="heading1">Video Search </h1>
@@ -141,4 +99,50 @@ export default MainPage;
 /*
 
 
+*/
+//let vidListTerm = JSON.parse(localStorage.getItem("searchItem"));
+// vidListTerm = searchRef.current.value ? searchRef.current.value : "penguins";
+/*
+ if (
+    searchRef.current.value !== undefined ||
+    searchRef.current.value !== null
+  ) {
+    console.log("why you reading the condition if it doesn't apply to you");
+    vidListTerm = searchRef.current.value
+      ? searchRef.current.value
+      : "penguins";
+  }
+*/
+/*//////////////from VideoSearchcontext
+   if (refreshMain) {
+        let searchTermL = localStorage.getItem("searchItem");
+        let vidL = JSON.parse(localStorage.getItem(searchTermL));
+        let pageTokenL = localStorage.getItem("nextPageToken");
+        setSearchItem((prev) => searchTermL);
+        setVideos((prev) => vidL);
+        setNextPageToken((prev) => pageTokenL);
+        setRefreshMain((prev) => false);
+        setLoadVideos((prev) => false);
+      } else {
+  /////
+
+
+  useEffect(() => {
+    console.log("1st REFRESH CHECK");
+    console.log("location.pathname OIIII" + location.pathname.substring(1));
+    let localSearch = localStorage.getItem("searchItem");
+    if (localSearch) {
+      console.log("localSearch :" + localSearch);
+      let res = localSearch.localeCompare(location.pathname.substring(1));
+      console.log("comparison result of local and url " + res);
+      //refresh scenario
+      if (
+        res === 0 &&
+        searchItem.localeCompare(location.pathname.substring(1))
+      ) {
+        console.log("browser was refreshed");
+        setRefreshMain((prev) => true);
+      }
+    }
+  }, [location.pathname, searchItem]);
 */
