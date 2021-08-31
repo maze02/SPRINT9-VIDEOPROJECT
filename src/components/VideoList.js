@@ -39,6 +39,15 @@ const VideoList = ({
     };
     if (videoListArr) {
       for (let i = 0; i < videoListArr.length; i++) {
+        if (videoListArr[i].snippet === undefined) {
+          videoListArr.splice(i, 1);
+        }
+      }
+      for (let i = 0; i < videoListArr.length; i++) {
+        /* if (videoListArr[i].snippet === undefined) {
+          videoListArr.splice(i, 1);
+        }
+        */
         if (videoListArr[i].favoriteStatus === undefined) {
           //video check run here
           let resFav = favoriteCheck(

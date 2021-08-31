@@ -5,20 +5,18 @@ import { VideoSearchContext } from "./VideoSearchCtx";
 
 // /videodetail/:videoId
 const VideoDetailProvider = (props) => {
-  let lastViewedL = localStorage.getItem("lastViewed");
-  let lastViewedArr = lastViewedL ? JSON.parse(lastViewedL) : [];
-
-  const [lastViewed, setLastViewed] = useState(lastViewedArr);
-  // let relaVid = localStorage.getItem("relatedVideos")
-  // ? JSON.parse(localStorage.getItem("relatedVideos"))
-  //   : [];
   const { videos, selectId, searchItem, setSelectId, setSelectedVideo } =
     useContext(VideoSearchContext);
-  //let selectIdL = localStorage.getItem("selectId");
-  //let selectIdL = selectId ? localStorage.getItem("selectId") : selectId;
-  //console.log("0000-SELECTIDL= " + selectIdL);
+  let lastViewedL = localStorage.getItem("lastViewed");
+  let lastViewedArr = lastViewedL ? JSON.parse(lastViewedL) : [];
+  const [lastViewed, setLastViewed] = useState(lastViewedArr);
+
+  let relaVidArr = localStorage.getItem("relatedVideos")
+    ? JSON.parse(localStorage.getItem("relatedVideos"))
+    : [];
+
   console.log("0000-selectId =" + selectId);
-  const [relatedVideos, setRelatedVideos] = useState([]);
+  const [relatedVideos, setRelatedVideos] = useState(relaVidArr);
   const [loadRelVideos, setLoadRelVideos] = useState(true);
   const [nextRelPageToken, setRelNextPageToken] = useState("");
   console.log("111111111111-SETTING REFRESHDETAILPAGE-> TRUE");
@@ -48,10 +46,12 @@ const VideoDetailProvider = (props) => {
     localStorage.setItem("refreshDetailPg", "false");
     setSelectId((prev) => id);
     localStorage.setItem("selectId", JSON.stringify(id));
-    let videoListStr = localStorage.getItem(videoListType);
+
     //handling page being refreshed
     let vidId = localStorage.getItem("selectId");
-    let videoListP = videoListStr ? JSON.parse(videoListStr) : [];
+    let videoListP = localStorage.getItem(videoListType)
+      ? JSON.parse(localStorage.getItem(videoListType))
+      : [];
     let selectItem = null;
 
     for (let i = 0; i < videoListP.length; i++) {
@@ -120,6 +120,7 @@ const VideoDetailProvider = (props) => {
             },
           });
       await console.log(res.data.items);
+      await console.log("IIIII-relatedvids-result" + res.data.items);
       if (refreshDetailPg === false) {
         if (
           relatedVideos.length === 0 ||
@@ -127,9 +128,6 @@ const VideoDetailProvider = (props) => {
             JSON.parse(localStorage.getItem("selectId"))
           ) !== 0
         ) {
-          console.log("77777-refreshDetailPg status : " + refreshDetailPg);
-          console.log("7777-CHANGING RELATED VIDEOS IN LOCAL");
-          //console.log("7777-selectIdL = " + selectIdL);
           await localStorage.setItem(
             "relatedVideos",
             JSON.stringify(res.data.items)
