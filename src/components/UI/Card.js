@@ -12,37 +12,59 @@ const CardSecondary = ({ children, id, videoListType, pressed }) => {
 };
 
 const Wrapper = styled.div`
-  /*  width: 90vw; */
-  display: grid;
-  grid-template-rows: 1fr 0.5fr;
-  width: 100%;
-  margin: 0rem 1rem 1rem 0rem;
-  padding-bottom: 1rem;
+  max-width: 250px;
   min-width: 200px;
-  background-color: white;
+  display: grid;
+  grid-template-rows: 60% 30%;
+  width: 100%;
+  margin: 0rem 1rem 0rem 0rem;
+  padding-bottom: -1rem;
   border-radius: 0.25rem;
   cursor: pointer;
   //flex: 0 0 auto;
-  img {
-    width: 100%;
+  .img-wrapper {
+    width: auto;
+    object-fit: cover;
+    display: flex;
     border-radius: 0.25rem 0.25rem 0rem 0rem;
+    overflow: hidden;
+    img {
+      display: inline;
+      margin: 0 auto;
+      width: auto;
+      object-fit: contain;
+    }
   }
   .secondary-card-text {
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    margin: 0rem 1rem 0rem 1rem;
+    grid-template-rows: 1fr 0.5fr;
+    padding: 0rem 1rem 0rem 1rem;
+    background-color: white;
+    border-radius: 0rem 0rem 0.25rem 0.25rem;
   }
   .description-brief {
     display: flex;
     margin-top: 0.6rem;
+    margin-right: 1rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     h5 {
       margin-top: 0rem;
       margin-bottom: 0rem;
-    }
+      text-overflow: ellipsis;
+      //clear: both;
+      //display: inline-block;
+      //overflow: hidden;
+      //white-space: nowrap;
 
-    p {
-      margin-top: -0.7rem;
-      padding-bottom: 2rem;
+      .description-title {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 150px;
+      }
     }
   }
 
@@ -50,8 +72,8 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: -1rem;
-    margin-bottom: -1rem;
+    margin-top: -2rem;
+
     p {
       font-size: 0.8rem;
     }

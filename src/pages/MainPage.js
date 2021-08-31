@@ -46,7 +46,7 @@ const MainPage = () => {
   //let date = moment();
   return (
     <Fragment>
-      <h1>MainPage</h1>
+      <h1>MainPage </h1>
 
       <section className="section-searchbar-wrapper">
         <div className="border">

@@ -1,7 +1,7 @@
 import moment from "moment";
 import { useContext } from "react";
 import CardTertiary from "../components/UI/TertiaryCard";
-import { HistoryContext } from "./store/HistoryCtx";
+import { HistoryContext } from "../components/store/HistoryCtx";
 
 const CondensedHistoryItem = ({ url, searchTerm, date }) => {
   const { handleViewHistory } = useContext(HistoryContext);
@@ -28,7 +28,7 @@ const CondensedHistoryItem = ({ url, searchTerm, date }) => {
             handleViewHistory(searchTerm);
           }}
         >
-          View videos
+          load videos
         </button>
       </div>
     </CardTertiary>
@@ -37,10 +37,4 @@ const CondensedHistoryItem = ({ url, searchTerm, date }) => {
 
 export default CondensedHistoryItem;
 
-//  {moment("2021-08-27 11:20:10", "YYYY-MM-DD hh:mm:ss").fromNow()}
-/*
-moment(
-  date.substring(0, 19).replace("T", " "),
-  "YYYY-MM-DD hh:mm:ss"
-).fromNow();
-*/
+//handleViewHistory(searchTerm)

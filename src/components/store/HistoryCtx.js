@@ -1,25 +1,25 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { VideoDetailContext } from "./VideoDetailCtx";
+import { VideoSearchContext } from "./VideoSearchCtx";
 
 const HistoryProvider = (props) => {
+  const { setSelectedVideo, selectedVideo } = useContext(VideoSearchContext);
+  const { handleVideoSelect } = useContext(VideoDetailContext);
   let selHistoryL = localStorage.getItem("selectedHistory");
-  //  let selHistoryArr = selHistoryL ? JSON.parse(selHistoryL) : "";
   let selHistoryArr = selHistoryL ? JSON.parse(selHistoryL) : [];
   const [selectedHistory, setSelectedHistory] = useState(selHistoryArr);
 
-  //const [selectedHistory, setSelectedHistory] = useState(selHistoryT);
-
   const history = useHistory();
 
-  const handleViewHistory = (searchTermP) => {
-    console.log("OEOEOE CLICKED YO!");
-    //setting state relating to search Term picked
-    setSelectedHistory((prev) => searchTermP);
-    localStorage.setItem("selectedHistory", searchTermP);
-
-    //back up -loop through list incase previous localStorage is tampered with, technically could just picked it from localStorage
-
-    history.push(`/history`);
+  const handleViewHistory = (termP) => {
+    let hisViewStr = localStorage.getItem(termP);
+    let hisViewArr = hisViewStr ? JSON.parse(hisViewStr) : [];
+    setSelectedHistory((prev) => hisViewArr);
+    localStorage.setItem("seletedHistory", hisViewStr);
+    handleVideoSelect(hisViewArr[0].id.videoId, "selectedHistory");
+    setSelectedVideo((prev) => hisViewArr[0]);
+    localStorage.setItem("selectedVideo", JSON.stringify(hisViewArr[0]));
   };
 
   return (

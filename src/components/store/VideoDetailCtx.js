@@ -38,12 +38,6 @@ const VideoDetailProvider = (props) => {
       if (selectId) {
         setRefreshDetailPg((prev) => false);
         console.log("555555-SETTING REFRESHDETAILPAGE-> FALSE");
-        /*
-      } else {
-        setRefreshDetailPg((prev) => true);
-        console.log("888888-SETTING REFRESHDETAILPAGE-> TRUE");
-      }
-      */
       }
     }
   }, [selectId]);
@@ -54,10 +48,10 @@ const VideoDetailProvider = (props) => {
     localStorage.setItem("refreshDetailPg", "false");
     setSelectId((prev) => id);
     localStorage.setItem("selectId", JSON.stringify(id));
-
+    let videoListStr = localStorage.getItem(videoListType);
     //handling page being refreshed
     let vidId = localStorage.getItem("selectId");
-    let videoListP = JSON.parse(localStorage.getItem(videoListType));
+    let videoListP = videoListStr ? JSON.parse(videoListStr) : [];
     let selectItem = null;
 
     for (let i = 0; i < videoListP.length; i++) {
@@ -101,10 +95,10 @@ const VideoDetailProvider = (props) => {
 */
   const getRelVideos = async (videoId) => {
     console.log("222222- refreshDetailpg Status " + refreshDetailPg);
-    let apiKey = `${process.env.REACT_APP_ACCESS_KEY1}`;
-    let apiKey3 = `${process.env.REACT_APP_ACCESS_KEY2}`;
-    let apiKey0 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
-    let apiKey4 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
+    let apiKey4 = `${process.env.REACT_APP_ACCESS_KEY1}`;
+    let apiKey = `${process.env.REACT_APP_ACCESS_KEY2}`;
+    let apiKey2 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
+    let apiKey0 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
 
     try {
       let res = nextRelPageToken

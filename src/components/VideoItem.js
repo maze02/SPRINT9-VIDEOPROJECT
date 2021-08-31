@@ -18,20 +18,21 @@ const VideoItem = ({
 }) => {
   const { buttonHeart } = useContext(VideoSearchContext);
   const { favorites, toggleFavorite } = useContext(FavoritesContext);
-
+  //{title.substring(0, 21)}
   return (
     <CardSecondary
       id={id}
       videoListType={videoListType}
       pressed={handleVideoSelect}
     >
-      <div>
+      <div className="img-wrapper">
         <img src={url} alt={title} />
       </div>
       <div className="secondary-card-text">
-        {" "}
         <div className="description-brief">
-          <h5>{title.substring(0, 21)}...</h5>
+          <h5>
+            <span className="description-title">{title}</span>
+          </h5>
         </div>
         <div className="card-footer">
           <p>{date}</p>

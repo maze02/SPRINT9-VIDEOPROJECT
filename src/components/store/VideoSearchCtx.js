@@ -62,10 +62,10 @@ const VideoSearchProvider = (props) => {
 
   const getVideos = async () => {
     console.log("2nd LOAD VIDEOS AFTER REFRESH CHECK");
-    let apiKey = `${process.env.REACT_APP_ACCESS_KEY1}`;
-    let apiKey2 = `${process.env.REACT_APP_ACCESS_KEY2}`;
-    let apiKey0 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
-    let apiKey1 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
+    let apiKey4 = `${process.env.REACT_APP_ACCESS_KEY1}`;
+    let apiKey = `${process.env.REACT_APP_ACCESS_KEY2}`;
+    let apiKey2 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
+    let apiKey0 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
     console.log(
       "location.pathname before history.push=" + location.pathname.substring(1)
     );
@@ -205,14 +205,20 @@ const VideoSearchProvider = (props) => {
     console.log("AAAA-" + arrHisVids[0].searchTermH);
     console.log("AAAA-arrHisMix" + arrHisMix.length);
     //  if (arrHisVids[0].searchTermH.localeCompare(searchStrP) !== 0) {
+    console.log("AIAIAIAI -historyVid.length " + arrHisVids.length);
+
     arrHisMix.unshift(arrHisVids[0].historyVidList[1]);
     arrHisMix.unshift(arrHisVids[0].historyVidList[0]);
-
+    if (arrHisVids.length <= 2) {
+      arrHisMix.pop();
+      arrHisMix.pop();
+    }
     //checking list length max 10 videos
     if (arrHisMix.length > 10) {
       arrHisMix.pop();
       arrHisMix.pop();
     }
+
     localStorage.setItem("historyMix", JSON.stringify(historyMixArr));
     setHistoryMix((prev) => historyMixArr);
     //  }
@@ -293,6 +299,7 @@ const VideoSearchProvider = (props) => {
     <VideoSearchContext.Provider
       value={{
         historyMix: historyMix,
+        historyVideos: historyVideos,
         buttonHeart: buttonHeart,
         videos: videos,
         loadVideos: loadVideos,

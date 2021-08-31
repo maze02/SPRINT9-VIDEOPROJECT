@@ -6,13 +6,21 @@ const CondensedHistoryList = () => {
 
   try {
     let videoListArr = JSON.parse(localStorage.getItem("historyVideos"));
-    if (videoListArr) {
+    if (!videoListArr || (videoListArr && videoListArr.length <= 2)) {
+      videoListShow = (
+        <p className="text-center">
+          Why not search for something that tickles your curiosity?
+        </p>
+      );
+    }
+    if (videoListArr && videoListArr.length > 2) {
       //removing first item that is placed when loaded for refresh comparison in videoSearchCtx so searchTerm is not undefined in videoSearchCtx
       if (
         videoListArr[videoListArr.length - 1].searchTermH.localeCompare(
           "1919"
         ) === 0
       ) {
+        videoListArr.pop();
         videoListArr.pop();
       }
       videoListShow = videoListArr.map((e, index) => {
@@ -25,8 +33,6 @@ const CondensedHistoryList = () => {
           />
         );
       });
-    } else {
-      <h2>No videos searched yet</h2>;
     }
   } catch (err) {
     console.log(err);
