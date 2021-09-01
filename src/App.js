@@ -5,6 +5,7 @@ import VideoSearchProvider from "./components/store/VideoSearchCtx";
 import VideoDetailProvider from "./components/store/VideoDetailCtx";
 import HistoryProvider from "./components/store/HistoryCtx";
 import FavoritesProvider from "./components/store/FavoritesCtx";
+import HorizontalSliderProvider from "./components/store/HorizontalSliderCtx";
 //REACT & COMPONENTS IMPORT
 import Layout from "./layout/Layout";
 import DevelopersConsolePage from "./pages/DevelopersConsolePage";
@@ -22,22 +23,28 @@ const App = () => {
         <VideoDetailProvider>
           <FavoritesProvider>
             <HistoryProvider>
-              <Layout>
-                <Switch>
-                  <Route
-                    path="/videodetail/:videoId"
-                    component={VideoDetailPage}
-                  ></Route>
-                  <Route path="/favorites" component={FavoritesPage}></Route>
-                  <Route path="/history" component={HistoryPage}></Route>
-                  <Route
-                    path="/developer"
-                    component={DevelopersConsolePage}
-                  ></Route>
-                  <Route path="/" component={MainPage} exact></Route>
-                  <Route path="/:searchTerm" component={MainPage} exact></Route>
-                </Switch>
-              </Layout>
+              <HorizontalSliderProvider>
+                <Layout>
+                  <Switch>
+                    <Route
+                      path="/videodetail/:videoId"
+                      component={VideoDetailPage}
+                    ></Route>
+                    <Route path="/favorites" component={FavoritesPage}></Route>
+                    <Route path="/history" component={HistoryPage}></Route>
+                    <Route
+                      path="/developer"
+                      component={DevelopersConsolePage}
+                    ></Route>
+                    <Route path="/" component={MainPage} exact></Route>
+                    <Route
+                      path="/:searchTerm"
+                      component={MainPage}
+                      exact
+                    ></Route>
+                  </Switch>
+                </Layout>
+              </HorizontalSliderProvider>
             </HistoryProvider>
           </FavoritesProvider>
         </VideoDetailProvider>

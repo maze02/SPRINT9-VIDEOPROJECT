@@ -63,8 +63,8 @@ const VideoSearchProvider = (props) => {
   const getVideos = async () => {
     console.log("2nd LOAD VIDEOS AFTER REFRESH CHECK");
     let apiKey4 = `${process.env.REACT_APP_ACCESS_KEY1}`;
-    let apiKey = `${process.env.REACT_APP_ACCESS_KEY2}`;
-    let apiKey2 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
+    let apiKey2 = `${process.env.REACT_APP_ACCESS_KEY2}`;
+    let apiKey = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
     let apiKey0 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
     console.log(
       "location.pathname before history.push=" + location.pathname.substring(1)

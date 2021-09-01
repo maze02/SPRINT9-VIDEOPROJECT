@@ -3,6 +3,7 @@ import FavoritesItem from "./FavoritesItem";
 import moment from "moment";
 import { Fragment, useContext, useEffect } from "react";
 import { FavoritesContext } from "./store/FavoritesCtx";
+import { HorizontalSliderContext } from "./store/HorizontalSliderCtx";
 
 const VideoList = ({
   loadVideos,
@@ -12,6 +13,13 @@ const VideoList = ({
   videoListState,
 }) => {
   const { favorites } = useContext(FavoritesContext);
+  const {
+    pressed,
+    outerslider,
+    innerslider,
+    mouseDownSlider,
+    handleMouseMove,
+  } = useContext(HorizontalSliderContext);
   let videoListShow = null;
   let favoritesArr = [];
   let favoritesL = localStorage.getItem("favorites");
@@ -44,10 +52,6 @@ const VideoList = ({
         }
       }
       for (let i = 0; i < videoListArr.length; i++) {
-        /* if (videoListArr[i].snippet === undefined) {
-          videoListArr.splice(i, 1);
-        }
-        */
         if (videoListArr[i].favoriteStatus === undefined) {
           //video check run here
           let resFav = favoriteCheck(
@@ -102,7 +106,7 @@ const VideoList = ({
         />
       );
     });
-
+    //returning unstyled favorites list in videoListShow
     return (
       <Fragment>
         {loadVideos && videoListShow !== null && videoListShow}
@@ -112,29 +116,38 @@ const VideoList = ({
     loadVideos = false;
   }
   return (
-    <div className="videolist-wrapper">
-      {loadVideos && <p>Loading videoList...</p>}
-      {!loadVideos && videoListShow !== null && videoListShow}
-      {!loadVideos &&
-        videoListShow === null &&
-        videoListType === "favorites" && (
-          <p>
-            No Favorites added yet. Click on the heart icon of the videos to
-            add.
-          </p>
-        )}
+    <div className="outer-slider" ref={outerslider}>
+      <div
+        className="inner-slider"
+        ref={innerslider}
+        onMouseDown={(e) => {
+          mouseDownSlider(e, innerslider);
+        }}
+        onMouseMove={(e) => {
+          handleMouseMove(e, innerslider);
+        }}
+      >
+        {loadVideos && <p>Loading videoList...</p>}
+        {!loadVideos && videoListShow !== null && videoListShow}
+        {!loadVideos &&
+          videoListShow === null &&
+          videoListType === "favorites" && (
+            <p>
+              No Favorites added yet. Click on the heart icon of the videos to
+              add.
+            </p>
+          )}
+      </div>
     </div>
   );
 };
 export default VideoList;
 
-/*      <h3 className="heading3">Related Videos</h3>*/
-
 /*
-console.log(
-          "video id =" +
-            videoListArr[i].id.videoId +
-            ", favorite status =" +
-            videoListArr[i].favoriteStatus
-        );
+    onMouseDown={(e) => {
+          mouseDownSlider(e, innerslider);
+        }}
+        onMouseMove={(e) => {
+          handleMouseMove(e, innerslider);
+        }}
 */

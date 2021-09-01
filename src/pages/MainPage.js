@@ -46,8 +46,6 @@ const MainPage = () => {
   //let date = moment();
   return (
     <Fragment>
-      <h1>MainPage </h1>
-
       <section className="section-searchbar-wrapper">
         <div className="border">
           <h1 className="heading1">Video Search </h1>
@@ -61,7 +59,7 @@ const MainPage = () => {
 
       {!videoSearchErr.status && (
         <section className="section-video-wrapper">
-          <h2>Recommended Videos</h2>
+          <h2 className="heading2">Recommended Videos</h2>
           <VideoList
             loadVideos={loadVideosL}
             handleVideoSelect={handleVideoSelect}
@@ -74,11 +72,13 @@ const MainPage = () => {
 
       <div className="main-history-favorites-wrapper">
         <section className="searches-wrapper">
-          <h2>Last searches</h2>
+          <h2 className="heading2">Last searches</h2>
           <CondensedHistoryList />
         </section>
         <section className="searches-wrapper">
-          <h2>Favorites videos &#183; {favorites.length}</h2>
+          <h2 className="heading2">
+            Favorites videos &#183; {favorites.length}
+          </h2>
           <div className="favorites-main-view">
             <VideoList
               loadVideos={true}

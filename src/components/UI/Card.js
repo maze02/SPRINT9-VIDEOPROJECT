@@ -12,11 +12,13 @@ const CardSecondary = ({ children, id, videoListType, pressed }) => {
 };
 
 const Wrapper = styled.div`
+  color: black;
   max-width: 250px;
   min-width: 200px;
   display: grid;
   grid-template-rows: 60% 30%;
   width: 100%;
+  max-width: 13rem;
   margin: 0rem 1rem 0rem 0rem;
   padding-bottom: -1rem;
   border-radius: 0.25rem;

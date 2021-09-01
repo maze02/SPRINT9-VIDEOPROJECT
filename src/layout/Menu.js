@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,9 +14,8 @@ import {
 
 const Menu = () => {
   return (
-    <header>
+    <Wrapper>
       <h1>
-        {" "}
         <FontAwesomeIcon icon={faVideo} /> ReactTube
       </h1>
       <nav>
@@ -33,8 +33,7 @@ const Menu = () => {
           </li>
           <li>
             <NavLink to="/favorites" className="navLink">
-              <FontAwesomeIcon icon={faHeart} />
-              Favorites
+              <FontAwesomeIcon icon={faHeart} /> Favorites
             </NavLink>
           </li>
           <li>
@@ -62,8 +61,18 @@ const Menu = () => {
           </li>
         </ul>
       </nav>
-    </header>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.header`
+  background-color: var(--background-primary-1);
+  color: var(--font-white-1);
+  li {
+    margin-bottom: 1rem;
+  }
+  .navLink {
+    color: var(--font-white-1);
+  }
+`;
 export default Menu;

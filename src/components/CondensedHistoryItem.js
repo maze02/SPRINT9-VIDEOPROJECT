@@ -36,5 +36,3 @@ const CondensedHistoryItem = ({ url, searchTerm, date }) => {
 };
 
 export default CondensedHistoryItem;
-
-//handleViewHistory(searchTerm)
