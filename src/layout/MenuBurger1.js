@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState, useEffect, Fragment } from "react";
 import { Button, Accordion } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,15 +12,32 @@ import {
   faChartBar,
   faBookmark,
   faVideo,
+  faBars,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Menu = () => {
-  return (
-    <Wrapper>
+const MenuBurger1 = () => {
+  const [showMenu, setShowMenu] = useState(false);
+  const toggleMenu = () => {
+    if (showMenu) {
+      setShowMenu(false);
+    } else {
+      setShowMenu(true);
+    }
+  };
+  let collapsedMenu = (
+    <div className="menu-header" onClick={toggleMenu}>
       <h1>
         <FontAwesomeIcon icon={faVideo} /> ReactTube
       </h1>
-      <nav>
+      {!showMenu && <FontAwesomeIcon icon={faBars} />}
+      {showMenu && <FontAwesomeIcon icon={faTimes} />}
+    </div>
+  );
+  return (
+    <header>
+      <MenuHeader>{collapsedMenu}</MenuHeader>
+      <NavWrapper showMenu={showMenu}>
         <h2>MENU</h2>
         <ul>
           <li>
@@ -78,14 +96,35 @@ const Menu = () => {
             </NavLink>
           </li>
         </ul>
-      </nav>
-    </Wrapper>
+      </NavWrapper>
+    </header>
   );
 };
 
-const Wrapper = styled.header`
-  background-color: var(--background-primary-1);
-  color: var(--font-white-1);
+const MenuHeader = styled.div`
+  .menu-header {
+    background-color: var(--background-primary-1);
+    color: var(--font-white-1);
+
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+
+    svg {
+      width: 3rem;
+      height: 2rem;
+      align-self: center;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
+
+const NavWrapper = styled.nav`
+  display: ${({ showMenu }) => (showMenu ? "visible" : "none")};
+  margin-left: 4rem;
+
   h2 {
     font-size: 1rem;
   }
@@ -103,6 +142,8 @@ const Wrapper = styled.header`
     margin-right: 5rem;
     height: 0.05rem;
     background-color: var(--font-white-1);
+    //border: var(--font-white-1) solid 1rem;
   }
 `;
-export default Menu;
+
+export default MenuBurger1;

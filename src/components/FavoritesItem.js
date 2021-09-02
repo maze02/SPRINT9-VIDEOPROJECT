@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FavoritesContext } from "./store/FavoritesCtx";
 
 const FavoritesItem = ({
@@ -32,7 +32,7 @@ const FavoritesItem = ({
               handleVideoSelect(id, videoListType);
             }}
           >
-            <FontAwesomeIcon icon={faPlayCircle} />
+            <FontAwesomeIcon icon={faPlay} />
           </div>
           <div
             className="link trash"
@@ -82,7 +82,7 @@ const Wrapper = styled.article`
       align-items: center;
       justify-content: center;
       width: 50%;
-      height: 100%;
+      height: 100.5%;
       transition: all 0.3s linear;
       opacity: 0.7;
       cursor: pointer;
@@ -96,7 +96,7 @@ const Wrapper = styled.article`
         top: 50%;
         position: absolute;
         transform: translate(-50%, -50%);
-        background: black;
+        background: white;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -108,7 +108,7 @@ const Wrapper = styled.article`
         cursor: pointer;
         svg {
           font-size: 1.3rem;
-          color: #fff;
+          color: black;
         }
       }
       .play {

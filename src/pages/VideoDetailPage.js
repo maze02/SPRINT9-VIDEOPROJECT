@@ -26,6 +26,7 @@ const VideoDetailPage = () => {
       {!videoDetailErr.status && (
         <section className="section-video-wrapper">
           <VideoDetail />
+          <h2 className="heading2">Related Videos</h2>
           <VideoList
             loadVideos={loadRelVideos}
             handleVideoSelect={handleVideoSelect}

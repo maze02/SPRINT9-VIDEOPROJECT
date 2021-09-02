@@ -1,5 +1,6 @@
 //ROUTING IMPORTS
 import { Route, Switch } from "react-router";
+import { Redirect } from "react-router-dom";
 //CONTEXT
 import VideoSearchProvider from "./components/store/VideoSearchCtx";
 import VideoDetailProvider from "./components/store/VideoDetailCtx";
@@ -36,12 +37,13 @@ const App = () => {
                       path="/developer"
                       component={DevelopersConsolePage}
                     ></Route>
-                    <Route path="/" component={MainPage} exact></Route>
+
                     <Route
-                      path="/:searchTerm"
+                      path="/home/:searchTerm"
                       component={MainPage}
-                      exact
                     ></Route>
+                    <Route path="/home" component={MainPage} exact></Route>
+                    <Redirect from="/" to="/home/" component={MainPage} />
                   </Switch>
                 </Layout>
               </HorizontalSliderProvider>

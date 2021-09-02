@@ -72,11 +72,11 @@ const MainPage = () => {
 
       <div className="main-history-favorites-wrapper">
         <section className="searches-wrapper">
-          <h2 className="heading2">Last searches</h2>
+          <h2 className="heading3">Last searches</h2>
           <CondensedHistoryList />
         </section>
         <section className="searches-wrapper">
-          <h2 className="heading2">
+          <h2 className="heading3">
             Favorites videos &#183; {favorites.length}
           </h2>
           <div className="favorites-main-view">

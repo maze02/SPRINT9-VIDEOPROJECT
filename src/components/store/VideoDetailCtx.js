@@ -97,8 +97,8 @@ const VideoDetailProvider = (props) => {
     console.log("222222- refreshDetailpg Status " + refreshDetailPg);
     let apiKey4 = `${process.env.REACT_APP_ACCESS_KEY1}`;
     let apiKey2 = `${process.env.REACT_APP_ACCESS_KEY2}`;
-    let apiKey = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
-    let apiKey0 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
+    let apiKey0 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
+    let apiKey = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
 
     try {
       let res = nextRelPageToken
