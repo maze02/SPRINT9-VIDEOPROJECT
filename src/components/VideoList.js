@@ -116,35 +116,30 @@ const VideoList = ({
     loadVideos = false;
   }
   return (
-    <div className="outer-slider" ref={outerslider}>
-      <div
-        className="inner-slider"
-        ref={innerslider}
-        onMouseDown={(e) => {
-          mouseDownSlider(e, innerslider);
-        }}
-        onMouseMove={(e) => {
-          handleMouseMove(e, innerslider);
-        }}
-      >
-        {loadVideos && <p>Loading videoList...</p>}
-        {!loadVideos && videoListShow !== null && videoListShow}
-        {!loadVideos &&
-          videoListShow === null &&
-          videoListType === "favorites" && (
-            <p>
-              No Favorites added yet. Click on the heart icon of the videos to
-              add.
-            </p>
-          )}
-      </div>
+    <div>
+      {!loadVideos && videoListShow !== null && (
+        <div className="outer-slider">
+          <div className="inner-slider">{videoListShow}</div>
+        </div>
+      )}
+      {loadVideos && <p>Loading videoList...</p>}
+      {!loadVideos &&
+        videoListShow === null &&
+        videoListType === "favorites" && (
+          <p className="text-center">
+            No Favorites added yet. Click on the heart icon of the videos to
+            add.
+          </p>
+        )}
     </div>
   );
 };
 export default VideoList;
 
 /*
-    onMouseDown={(e) => {
+ref={outerslider}
+ ref={innerslider}
+        onMouseDown={(e) => {
           mouseDownSlider(e, innerslider);
         }}
         onMouseMove={(e) => {

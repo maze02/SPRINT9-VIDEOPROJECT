@@ -24,17 +24,19 @@ const VideoDetailPage = () => {
         <h2 className="text-center">Error. Please try again later.</h2>
       )}
       {!videoDetailErr.status && (
-        <section className="section-video-wrapper">
+        <Fragment>
           <VideoDetail />
           <h2 className="heading2">Related Videos</h2>
-          <VideoList
-            loadVideos={loadRelVideos}
-            handleVideoSelect={handleVideoSelect}
-            vidListTerm="relatedVideos"
-            videoListType="relatedVideos"
-            videoListState={relatedVideos}
-          />
-        </section>
+          <section className="section-video-wrapper">
+            <VideoList
+              loadVideos={loadRelVideos}
+              handleVideoSelect={handleVideoSelect}
+              vidListTerm="relatedVideos"
+              videoListType="relatedVideos"
+              videoListState={relatedVideos}
+            />
+          </section>
+        </Fragment>
       )}
     </Fragment>
   );

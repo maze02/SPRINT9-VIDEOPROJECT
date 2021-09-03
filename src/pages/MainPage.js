@@ -79,7 +79,13 @@ const MainPage = () => {
           <h2 className="heading3">
             Favorites videos &#183; {favorites.length}
           </h2>
-          <div className="favorites-main-view">
+          <div
+            className={
+              favorites.length > 0
+                ? "favorites-main-view"
+                : "comment-favpage-view"
+            }
+          >
             <VideoList
               loadVideos={true}
               handleVideoSelect={handleVideoSelect}
