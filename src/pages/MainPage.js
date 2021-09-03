@@ -1,5 +1,5 @@
 import { Fragment, useContext } from "react";
-import moment from "moment";
+
 //CONTEXT IMPORTS
 import { VideoSearchContext } from "../components/store/VideoSearchCtx";
 import { VideoDetailContext } from "../components/store/VideoDetailCtx";
@@ -51,7 +51,6 @@ const MainPage = () => {
           <SearchBar searchRef={searchRef} handleSubmit={handleSubmit} />
         </div>
       </section>
-
       {videoSearchErr.status && (
         <h3 className="text-center">Error. Please try again later.</h3>
       )}
@@ -102,7 +101,11 @@ const MainPage = () => {
 export default MainPage;
 
 /*
-
+ <section className="section-searchbar-wrapper">
+        <div className="border">
+          <SearchBar searchRef={searchRef} handleSubmit={handleSubmit} />
+        </div>
+      </section>
 
 */
 //let vidListTerm = JSON.parse(localStorage.getItem("searchItem"));

@@ -1,8 +1,11 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useContext, useState, useEffect } from "react";
+import { VideoSearchContext } from "../components/store/VideoSearchCtx";
 import Menu from "./Menu";
 import MenuBurger1 from "./MenuBurger1";
+import SearchBar from "../components/SearchBar";
 
 const Layout = (props) => {
+  const { handleSubmit, searchRef } = useContext(VideoSearchContext);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const checkSize = () => {
     setWindowSize(window.innerWidth);

@@ -43,6 +43,9 @@ const VideoList = ({
         if (videoListArr[i].snippet === undefined) {
           videoListArr.splice(i, 1);
         }
+        if (videoListArr[i].id.videoId === undefined) {
+          videoListArr.splice(i, 1);
+        }
       }
       for (let i = 0; i < videoListArr.length; i++) {
         if (videoListArr[i].favoriteStatus === undefined) {

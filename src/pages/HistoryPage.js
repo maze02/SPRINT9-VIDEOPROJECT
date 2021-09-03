@@ -3,6 +3,7 @@ import CondensedHistoryList from "../components/CondensedHistoryList";
 import { VideoSearchContext } from "../components/store/VideoSearchCtx";
 import { VideoDetailContext } from "../components/store/VideoDetailCtx";
 import { HistoryContext } from "../components/store/HistoryCtx";
+import SearchBar from "../components/SearchBar";
 
 //COMPONENT IMPORTS
 import VideoDetail from "../components/VideoDetail";
@@ -10,9 +11,15 @@ import VideoList from "../components/VideoList";
 const HistoryPage = () => {
   const { selectedHistory } = useContext(HistoryContext);
   const { lastViewed, handleVideoSelect } = useContext(VideoDetailContext);
-  const { historyMix, historyVideos } = useContext(VideoSearchContext);
+  const { historyMix, historyVideos, searchRef, handleSubmit } =
+    useContext(VideoSearchContext);
   return (
     <div className="page-container">
+      <section className="section-searchbar-wrapper">
+        <div className="border">
+          <SearchBar searchRef={searchRef} handleSubmit={handleSubmit} />
+        </div>
+      </section>
       <h1>History</h1>
       <h2>Last viewed</h2>
       {lastViewed && lastViewed.length !== 0 && (

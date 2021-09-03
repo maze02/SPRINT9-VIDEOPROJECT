@@ -7,19 +7,17 @@ import VideoDetail from "../components/VideoDetail";
 import VideoList from "../components/VideoList";
 
 const VideoDetailPage = () => {
+  const { searchRef, handleSubmit } = useContext(VideoSearchContext);
   const { loadRelVideos, handleVideoSelect, videoDetailErr, relatedVideos } =
     useContext(VideoDetailContext);
-
   return (
     <Fragment>
-      <h1>VideoDetail</h1>
       <section className="section-searchbar-wrapper">
         <div className="border">
-          <h1 className="heading1">Video Search </h1>
-          <SearchBar />
+          <SearchBar searchRef={searchRef} handleSubmit={handleSubmit} />
         </div>
       </section>
-
+      <h1 className="heading3">Video Detail</h1>
       {videoDetailErr.status && (
         <h2 className="text-center">Error. Please try again later.</h2>
       )}

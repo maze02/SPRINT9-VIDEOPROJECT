@@ -11,9 +11,12 @@ const FavoritesProvider = (props) => {
   const history = useHistory();
 
   const toggleFavorite = (videoId, videoListP, videoListState) => {
+    console.log("AI AI-TOGGLEFAV  videoListState YES" + videoListState);
+    console.log("AI AI-TOGGLEFAV  videoId- !!!!!!" + videoId);
+    console.log("AI AI-TOGGLEFAV  videoListP-YES" + videoListP);
     let favoritesL = localStorage.getItem("favorites")
       ? JSON.parse(localStorage.getItem("favorites"))
-      : null;
+      : null; //changing value
     let videoListArr = videoListState
       ? videoListState
       : JSON.parse(localStorage.getItem(videoListP));
@@ -40,6 +43,8 @@ const FavoritesProvider = (props) => {
       }
     } else {
       //if favorites not exist - adding to favs
+      console.log("OI OI OI videoListArr - " + videoListArr);
+      console.log("EI EI EI videoId - " + videoId);
       const j = videoListArr.findIndex(
         (element) => element.id.videoId.localeCompare(videoId) === 0
       );

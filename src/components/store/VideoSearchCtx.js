@@ -3,6 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
 import moment from "moment-timezone";
 
+//things learnt - do a clean check of each data item to use in the app, checking it contains all the data you'll be using because I have now found that many api data do not have all the info
 const VideoSearchProvider = (props) => {
   let searchTerm = localStorage.getItem("searchItem")
     ? localStorage.getItem("searchItem")
@@ -36,7 +37,7 @@ const VideoSearchProvider = (props) => {
   const [historyMix, setHistoryMix] = useState(historyMixArr);
   const [loadSelVideo, setLoadSelVideo] = useState(false);
   const [selVidErr, setSelVidErr] = useState(false);
-
+  /*
   if (refreshMain) {
     console.log("AT REFRESH CHECKPOINT");
     if (localStorage.getItem("searchItem")) {
@@ -57,11 +58,11 @@ const VideoSearchProvider = (props) => {
       setRefreshMain((prev) => false);
     }
   }
-
+*/
   const getVideos = async () => {
     console.log("2nd LOAD VIDEOS AFTER REFRESH CHECK");
-    let apiKey = `${process.env.REACT_APP_ACCESS_KEY1}`;
-    let apiKey2 = `${process.env.REACT_APP_ACCESS_KEY2}`;
+    let apiKey2 = `${process.env.REACT_APP_ACCESS_KEY1}`;
+    let apiKey = `${process.env.REACT_APP_ACCESS_KEY2}`;
     let apiKey0 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
     let apiKey4 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
     //console.log(
@@ -106,23 +107,24 @@ const VideoSearchProvider = (props) => {
         });
     await console.log(searchTerm);
     await console.log(res.data.items);
-
+    let dataList = [...res.data.items]; //*****changes might mess up */
+    checkDataHasId(dataList); //*****changes might mess up */
     //1st load scenario and new search term entered scenario
     if (
       videos.length === 0 ||
       searchTerm.localeCompare(JSON.parse(localStorage.getItem(searchItem))) !==
         0
     ) {
-      await localStorage.setItem(searchTerm, JSON.stringify(res.data.items));
-      await localStorage.setItem("videos", JSON.stringify(res.data.items));
+      await localStorage.setItem(searchTerm, JSON.stringify(dataList));
+      await localStorage.setItem("videos", JSON.stringify(dataList));
       await setVideos((previousVideos) => {
-        return res.data.items;
+        return dataList;
       });
 
       if (historyVideosArr[0].searchTermH.localeCompare(searchTerm) !== 0) {
         await historyVideosArr.unshift({
           searchTermH: searchTerm,
-          historyVidList: res.data.items,
+          historyVidList: dataList,
           date: moment().tz("Europe/Madrid").format(),
         });
 
@@ -138,14 +140,14 @@ const VideoSearchProvider = (props) => {
       //Scenario that the new pagetoken is added but have the same searchtern
       await localStorage.setItem(
         searchTerm,
-        JSON.stringify([...videos, ...res.data.items])
+        JSON.stringify([...videos, ...dataList])
       );
       await localStorage.setItem(
         "videos",
-        JSON.stringify([...videos, ...res.data.items])
+        JSON.stringify([...videos, ...dataList])
       );
       await setVideos((previousVideos) => {
-        return [...previousVideos, ...res.data.items];
+        return [...previousVideos, ...dataList];
       });
     }
 
@@ -231,6 +233,14 @@ const VideoSearchProvider = (props) => {
     getVideos();
   }, [nextPageToken]); //nextPageToken
 
+  const checkDataHasId = (listP) => {
+    for (let i = 0; i < listP.length; i++) {
+      if (listP[i].id.videoId === undefined) {
+        listP.splice(i, 1);
+      }
+    }
+    return listP;
+  };
   /*
   /////////////////////////////////infinite scroll
   useEffect(() => {

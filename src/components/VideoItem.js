@@ -39,6 +39,8 @@ const VideoItem = ({
           <div
             onClick={() => {
               console.log("YO YO YO id " + id);
+              console.log("YI YI YI videListType " + videoListType);
+              console.log("YA YA YA videoListState " + videoListState);
               toggleFavorite(id, videoListType, videoListState);
             }}
             className="button-heart"
