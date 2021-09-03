@@ -6,7 +6,7 @@ import VideoSearchProvider from "./components/store/VideoSearchCtx";
 import VideoDetailProvider from "./components/store/VideoDetailCtx";
 import HistoryProvider from "./components/store/HistoryCtx";
 import FavoritesProvider from "./components/store/FavoritesCtx";
-import HorizontalSliderProvider from "./components/store/HorizontalSliderCtx";
+
 //REACT & COMPONENTS IMPORT
 import Layout from "./layout/Layout";
 import DevelopersConsolePage from "./pages/DevelopersConsolePage";
@@ -24,7 +24,6 @@ const App = () => {
         <VideoDetailProvider>
           <FavoritesProvider>
             <HistoryProvider>
-              <HorizontalSliderProvider>
                 <Layout>
                   <Switch>
                     <Route
@@ -46,7 +45,6 @@ const App = () => {
                     <Redirect from="/" to="/home/" component={MainPage} />
                   </Switch>
                 </Layout>
-              </HorizontalSliderProvider>
             </HistoryProvider>
           </FavoritesProvider>
         </VideoDetailProvider>

@@ -60,10 +60,10 @@ const VideoSearchProvider = (props) => {
 
   const getVideos = async () => {
     console.log("2nd LOAD VIDEOS AFTER REFRESH CHECK");
-    let apiKey4 = `${process.env.REACT_APP_ACCESS_KEY1}`;
+    let apiKey = `${process.env.REACT_APP_ACCESS_KEY1}`;
     let apiKey2 = `${process.env.REACT_APP_ACCESS_KEY2}`;
     let apiKey0 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
-    let apiKey = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
+    let apiKey4 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
     //console.log(
     //  "location.pathname before history.push=" + location.pathname.substring(6)
     //);
@@ -265,12 +265,15 @@ const VideoSearchProvider = (props) => {
   }, [videoSearchErr]);
 */
   const handleSubmit = (event) => {
-    event.preventDefault();
-    setLoadVideos((prev) => true);
-    console.log("submitting " + searchRef.current.value);
-    //*******change - might mess things up */
-    localStorage.setItem("searchItem", searchRef.current.value);
-    getVideos();
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      console.log("AAAAAENTERED-DETECTED");
+      setLoadVideos((prev) => true);
+      console.log("submitting " + searchRef.current.value);
+      //*******change - might mess things up */
+      localStorage.setItem("searchItem", searchRef.current.value);
+      getVideos();
+    }
   };
   /*
   useEffect(() => {

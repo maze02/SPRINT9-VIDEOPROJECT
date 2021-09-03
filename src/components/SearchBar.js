@@ -12,11 +12,11 @@ const SearchBar = ({ searchRef, handleSubmit }) => {
         <FontAwesomeIcon icon={faSearch} />
         <input
           type="text"
-          placeholder="What would you like to search today?"
+          placeholder="Type something and press enter to search"
           ref={searchRef}
+          onKeyDown={handleSubmit}
         />
       </div>
-      <button onClick={handleSubmit}>Search</button>
     </div>
   );
 };

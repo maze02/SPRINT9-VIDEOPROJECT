@@ -3,7 +3,6 @@ import FavoritesItem from "./FavoritesItem";
 import moment from "moment";
 import { Fragment, useContext, useEffect } from "react";
 import { FavoritesContext } from "./store/FavoritesCtx";
-import { HorizontalSliderContext } from "./store/HorizontalSliderCtx";
 
 const VideoList = ({
   loadVideos,
@@ -13,13 +12,7 @@ const VideoList = ({
   videoListState,
 }) => {
   const { favorites } = useContext(FavoritesContext);
-  const {
-    pressed,
-    outerslider,
-    innerslider,
-    mouseDownSlider,
-    handleMouseMove,
-  } = useContext(HorizontalSliderContext);
+
   let videoListShow = null;
   let favoritesArr = [];
   let favoritesL = localStorage.getItem("favorites");
@@ -118,9 +111,7 @@ const VideoList = ({
   return (
     <div>
       {!loadVideos && videoListShow !== null && (
-        <div className="outer-slider">
-          <div className="inner-slider">{videoListShow}</div>
-        </div>
+        <div className="video-list-wrapper">{videoListShow}</div>
       )}
       {loadVideos && <p>Loading videoList...</p>}
       {!loadVideos &&
@@ -134,6 +125,7 @@ const VideoList = ({
     </div>
   );
 };
+
 export default VideoList;
 
 /*

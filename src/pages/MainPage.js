@@ -48,7 +48,6 @@ const MainPage = () => {
     <Fragment>
       <section className="section-searchbar-wrapper">
         <div className="border">
-          <h1 className="heading1">Video Search </h1>
           <SearchBar searchRef={searchRef} handleSubmit={handleSubmit} />
         </div>
       </section>
@@ -59,7 +58,7 @@ const MainPage = () => {
 
       {!videoSearchErr.status && (
         <section className="section-video-wrapper">
-          <h2 className="heading2">Recommended Videos</h2>
+          <h2 className="heading3">Recommended Videos</h2>
           <VideoList
             loadVideos={loadVideosL}
             handleVideoSelect={handleVideoSelect}
