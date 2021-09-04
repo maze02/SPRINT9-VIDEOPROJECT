@@ -94,6 +94,11 @@ const Wrapper = styled.header`
   }
   .navLink {
     color: var(--font-white-1);
+    &:hover {
+      color: seagreen;
+      font-size: 1.05rem;
+      transition: all 0.1s ease-out;
+    }
   }
   .active {
     color: seagreen;

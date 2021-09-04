@@ -20,8 +20,8 @@ const Layout = (props) => {
   return (
     <Fragment>
       <div className="layout">
-        {windowSize > 577 && <Menu />}
-        {windowSize < 577 && <MenuBurger1 />}
+        {windowSize > 768 && <Menu />}
+        {windowSize < 768 && <MenuBurger1 />}
         <main>{props.children}</main>
       </div>
     </Fragment>

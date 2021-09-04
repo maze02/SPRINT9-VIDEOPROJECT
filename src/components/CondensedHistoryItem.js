@@ -12,7 +12,8 @@ const CondensedHistoryItem = ({ url, searchTerm, date }) => {
           <img src={url} alt={searchTerm} />
         </div>
         <div className="history-text">
-          <h4>{searchTerm} &#183;</h4>
+          <h4>{searchTerm} </h4>
+          <h4>&#183;</h4>
           <p>
             {moment(
               date.substring(0, 19).replace("T", " "),

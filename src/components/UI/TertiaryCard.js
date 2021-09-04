@@ -13,13 +13,16 @@ const Wrapper = styled.div`
   width: auto;
   margin-bottom: 0.4rem;
   @media screen and (min-width: 578px) {
-    max-width: 40rem;
+    max-width: 30rem;
+    padding: 0rem 1rem 0rem 1rem;
   }
   .button-wrapper {
     display: flex;
     justify-content: flex-end;
     margin-right: 0.5rem;
+    width: 100%;
     button {
+      width: auto;
       box-shadow: 0px 0px 0px transparent;
       text-shadow: 0px 0px 0px transparent;
       border-radius: 0.4rem;
@@ -34,9 +37,9 @@ const Wrapper = styled.div`
         transform: scale(1.1);
       }
 
-      @media screen and (min-width: 578px) {
-        margin-right: 3rem;
-      }
+      //    @media screen and (min-width: 578px) {
+      //    margin-right: 3rem;
+      //    }
     }
   }
 
@@ -45,7 +48,7 @@ const Wrapper = styled.div`
     justify-content: flex-start;
 
     .image-cropper {
-      margin: 0.5rem 0rem 0.5rem 0.5rem;
+      margin: 0.5rem 0rem 0.5rem 0rem;
       width: 4rem;
       height: 4rem;
       position: relative;
@@ -60,7 +63,7 @@ const Wrapper = styled.div`
         width: auto;
       }
       @media screen and (min-width: 578px) {
-        margin: 0.5rem 0rem 0.5rem 1rem;
+        margin: 0.5rem 0rem 0.5rem 0rem;
       }
     }
     .history-text {
