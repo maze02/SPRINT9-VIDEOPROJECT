@@ -11,19 +11,28 @@ const VideoList = ({
   videoListType,
   videoListState,
 }) => {
+  //variables
   const { favorites } = useContext(FavoritesContext);
-
   let videoListShow = null;
   let favoritesArr = [];
   let favoritesL = localStorage.getItem("favorites");
+  let vidListTermL = localStorage.getItem(vidListTerm);
   let videoListArr = JSON.parse(localStorage.getItem(vidListTerm));
+  console.log("OIOIOI -videoListState" + videoListState);
+  console.log("AIII-videoListArr- " + videoListArr);
+  console.log("UIUI-vidlistTerm -" + vidListTerm);
+  console.log(
+    "UKUK-vidlistTermL -loadVideos" + " " + loadVideos + " " + vidListTermL
+  );
+  console.log("FI FI FI-loadVideos-" + loadVideos);
+
   if (favoritesL) {
     //checking video is in favorites
     favoritesArr = JSON.parse(favoritesL);
   }
 
+  //logic 1. check based on correct variables input
   try {
-    //useEffect(() => {}, [favorites]);
     videoListArr = JSON.parse(localStorage.getItem(vidListTerm));
     let favoriteStatus = false;
 
@@ -43,9 +52,11 @@ const VideoList = ({
         if (videoListArr[i].snippet === undefined) {
           videoListArr.splice(i, 1);
         }
+        /*
         if (videoListArr[i].id.videoId === undefined) {
           videoListArr.splice(i, 1);
         }
+        */
       }
       for (let i = 0; i < videoListArr.length; i++) {
         if (videoListArr[i].favoriteStatus === undefined) {
@@ -59,6 +70,7 @@ const VideoList = ({
         }
       }
     }
+    //2.generating content for a standard strip list based on correct var input
     videoListShow = videoListArr.map((e, index) => {
       return (
         <VideoItem
@@ -79,9 +91,10 @@ const VideoList = ({
       );
     });
   } catch (error) {
+    //generating error if problem
     console.log(error);
   }
-  //handling favorites
+  //3. generating a favorites list based on correct var input
   if (videoListType === "favorites" && favoritesL) {
     videoListShow = videoListArr.map((e, index) => {
       return (
@@ -109,8 +122,10 @@ const VideoList = ({
       </Fragment>
     );
   } else {
+    //if there are no favorites in the list I think
     loadVideos = false;
   }
+  //returning content generated based on correct variable input
   return (
     <div>
       {!loadVideos && videoListShow !== null && (
@@ -130,14 +145,3 @@ const VideoList = ({
 };
 
 export default VideoList;
-
-/*
-ref={outerslider}
- ref={innerslider}
-        onMouseDown={(e) => {
-          mouseDownSlider(e, innerslider);
-        }}
-        onMouseMove={(e) => {
-          handleMouseMove(e, innerslider);
-        }}
-*/

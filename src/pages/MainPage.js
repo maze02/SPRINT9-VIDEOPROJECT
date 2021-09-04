@@ -31,6 +31,7 @@ const MainPage = () => {
   let loadVideosL = loadVideos;
   //let searchRefM = searchRef;
 
+  /* ******changes
   if (refreshMain) {
     vidListTerm = localStorage.getItem("searchItem");
     //loadVideosL = JSON.parse(localStorage.getItem(vidListTerm));
@@ -42,7 +43,7 @@ const MainPage = () => {
     //setRefreshMain((prev) => false);
     //setLoadVideos((prev) => false);
   }
-
+*/
   //let date = moment();
   return (
     <Fragment>

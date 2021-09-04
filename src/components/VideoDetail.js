@@ -125,7 +125,7 @@ const VideoDetailComponent = styled.article`
       //margin: 1rem 2rem 1rem 0rem;
       margin: 1rem !important;
       padding: 1rem !important;
-      width: auto;
+      width: 100%;
       display: grid;
       grid-template-columns: 60% 40%;
       background-color: lightcyan;
