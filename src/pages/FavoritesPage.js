@@ -19,24 +19,32 @@ const FavoritesPage = () => {
       </section>
       <h1>Favorites</h1>
       <FavoritesFavPageView>
-        <VideoList
-          loadVideos={false}
-          handleVideoSelect={handleVideoSelect}
-          vidListTerm="favorites"
-          videoListType="favorites"
-          videoListState={favorites}
-        />
+        <div
+          className={
+            favorites.length > 0 ? "favpage-view" : "comment-favpage-view"
+          }
+        >
+          <VideoList
+            loadVideos={false}
+            handleVideoSelect={handleVideoSelect}
+            vidListTerm="favorites"
+            videoListType="favorites"
+            videoListState={favorites}
+          />
+        </div>
       </FavoritesFavPageView>
     </div>
   );
 };
 
 const FavoritesFavPageView = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: center !important;
-  align-items: center;
-  max-width: 40rem;
-  gap: 1rem;
+  .favpage-view {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center !important;
+    align-items: center;
+    max-width: 40rem;
+    gap: 1rem;
+  }
 `;
 export default FavoritesPage;
