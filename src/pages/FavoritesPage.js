@@ -20,7 +20,7 @@ const FavoritesPage = () => {
       <h1>Favorites</h1>
       <FavoritesFavPageView>
         <VideoList
-          loadVideos={true}
+          loadVideos={false}
           handleVideoSelect={handleVideoSelect}
           vidListTerm="favorites"
           videoListType="favorites"

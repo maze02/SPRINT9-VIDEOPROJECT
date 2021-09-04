@@ -86,7 +86,7 @@ const MainPage = () => {
             }
           >
             <VideoList
-              loadVideos={true}
+              loadVideos={false}
               handleVideoSelect={handleVideoSelect}
               vidListTerm="favorites"
               videoListType="favorites"
