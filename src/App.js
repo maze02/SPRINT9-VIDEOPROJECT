@@ -24,27 +24,24 @@ const App = () => {
         <VideoDetailProvider>
           <FavoritesProvider>
             <HistoryProvider>
-                <Layout>
-                  <Switch>
-                    <Route
-                      path="/videodetail/:videoId"
-                      component={VideoDetailPage}
-                    ></Route>
-                    <Route path="/favorites" component={FavoritesPage}></Route>
-                    <Route path="/history" component={HistoryPage}></Route>
-                    <Route
-                      path="/developer"
-                      component={DevelopersConsolePage}
-                    ></Route>
+              <Layout>
+                <Switch>
+                  <Route
+                    path="/videodetail/:videoId"
+                    component={VideoDetailPage}
+                  ></Route>
+                  <Route path="/favorites" component={FavoritesPage}></Route>
+                  <Route path="/history" component={HistoryPage}></Route>
+                  <Route
+                    path="/developer"
+                    component={DevelopersConsolePage}
+                  ></Route>
 
-                    <Route
-                      path="/home/:searchTerm"
-                      component={MainPage}
-                    ></Route>
-                    <Route path="/home" component={MainPage} exact></Route>
-                    <Redirect from="/" to="/home/" component={MainPage} />
-                  </Switch>
-                </Layout>
+                  <Route path="/home/:searchTerm" component={MainPage}></Route>
+                  <Route path="/home" component={MainPage} exact></Route>
+                  <Redirect from="/" to="/home/" component={MainPage} />
+                </Switch>
+              </Layout>
             </HistoryProvider>
           </FavoritesProvider>
         </VideoDetailProvider>

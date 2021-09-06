@@ -21,14 +21,21 @@ const Wrapper = styled.div`
   max-width: 13rem;
   margin: 0rem 1rem 0rem 0rem;
   padding-bottom: -1rem;
-  border-radius: 0.25rem;
+  //border-radius: 1rem;
   cursor: pointer;
+  height: 12rem;
+  transition: transform 450ms;
+
+  &:hover {
+    transform: scale(1.05);
+    //transition: all 0.1s ease-out;
+  }
   //flex: 0 0 auto;
   .img-wrapper {
     width: auto;
     object-fit: cover;
     display: flex;
-    border-radius: 0.25rem 0.25rem 0rem 0rem;
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
     overflow: hidden;
     img {
       display: inline;
@@ -42,18 +49,18 @@ const Wrapper = styled.div`
     grid-template-rows: 1fr 0.5fr;
     padding: 0rem 1rem 0rem 1rem;
     background-color: white;
-    border-radius: 0rem 0rem 0.25rem 0.25rem;
+    border-radius: 0rem 0rem 0.5rem 0.5rem;
   }
   .description-brief {
     display: flex;
-    margin-top: 0.6rem;
+    margin-top: 0.4rem;
     margin-right: 1rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     h5 {
       margin-top: 0rem;
-      margin-bottom: 0rem;
+      padding-bottom: 1rem;
       text-overflow: ellipsis;
       //clear: both;
       //display: inline-block;
@@ -74,7 +81,8 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: -2rem;
+    margin-top: -1.8rem;
+    padding-top: 1.2rem;
 
     p {
       font-size: 0.8rem;
@@ -84,6 +92,16 @@ const Wrapper = styled.div`
   .button-heart {
     color: red;
     z-index: 10;
+    transition: transform 450ms;
+    &:hover {
+      transform: scale(1.2);
+      cursor: pointer;
+      svg {
+        path {
+          fill: red;
+        }
+      }
+    }
   }
 `;
 

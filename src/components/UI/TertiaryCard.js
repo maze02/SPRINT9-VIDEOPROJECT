@@ -6,7 +6,7 @@ const CardTertiary = ({ children }) => {
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 75% 25%;
   align-items: center;
   border-radius: 0.4rem;
   background-color: grey;
@@ -32,9 +32,10 @@ const Wrapper = styled.div`
       border: none;
       font-family: Arial, Helvetica, sans-serif;
       font-weight: 600;
-
+      transition: transform 450ms;
       &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
+        cursor: pointer;
       }
 
       //    @media screen and (min-width: 578px) {
@@ -44,8 +45,11 @@ const Wrapper = styled.div`
   }
 
   .history-info {
-    display: flex;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    align-items: center;
+    //    display: flex;
+    //  justify-content: flex-start;
 
     .image-cropper {
       margin: 0.5rem 0rem 0.5rem 0rem;
@@ -69,8 +73,8 @@ const Wrapper = styled.div`
     .history-text {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
+
+      justify-content: flex-start;
       margin-left: 0.5rem;
       h4 {
         margin-right: 0.3rem;

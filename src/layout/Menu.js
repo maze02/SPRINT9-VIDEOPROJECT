@@ -16,8 +16,9 @@ import {
 const Menu = () => {
   return (
     <Wrapper>
-      <h1>
-        <FontAwesomeIcon icon={faVideo} /> ReactTube
+      <h1 className="logo-header">
+        <FontAwesomeIcon icon={faVideo} />
+        <span> ReactTube</span>
       </h1>
       <nav>
         <h2>MENU</h2>
@@ -94,10 +95,11 @@ const Wrapper = styled.header`
   }
   .navLink {
     color: var(--font-white-1);
+    transition: all 0.1s ease-out;
+
     &:hover {
       color: seagreen;
       font-size: 1.05rem;
-      transition: all 0.1s ease-out;
     }
   }
   .active {

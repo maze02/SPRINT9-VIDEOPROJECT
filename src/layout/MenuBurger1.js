@@ -28,7 +28,8 @@ const MenuBurger1 = () => {
   let collapsedMenu = (
     <div className="menu-header" onClick={toggleMenu}>
       <h1>
-        <FontAwesomeIcon icon={faVideo} /> ReactTube
+        <FontAwesomeIcon icon={faVideo} />
+        <span className="logo-header"> ReactTube</span>
       </h1>
       {!showMenu && <FontAwesomeIcon icon={faBars} />}
       {showMenu && <FontAwesomeIcon icon={faTimes} />}

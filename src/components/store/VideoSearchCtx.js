@@ -61,127 +61,128 @@ const VideoSearchProvider = (props) => {
 */
   const getVideos = async () => {
     console.log("2nd LOAD VIDEOS AFTER REFRESH CHECK");
-    let apiKey2 = `${process.env.REACT_APP_ACCESS_KEY1}`;
-    let apiKey = `${process.env.REACT_APP_ACCESS_KEY2}`;
+    let apiKey = `${process.env.REACT_APP_ACCESS_KEY1}`;
+    let apiKey2 = `${process.env.REACT_APP_ACCESS_KEY2}`;
     let apiKey0 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
     let apiKey4 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
     //console.log(
     //  "location.pathname before history.push=" + location.pathname.substring(6)
     //);
 
-    // try {
-    //getting videos as a result of submitting something in the search bar, therefore not as a result of refreshing.
-    let searchTerm = localStorage.getItem("searchItem")
-      ? localStorage.getItem("searchItem")
-      : "penguins";
-    console.log("1. searchTerm" + searchTerm);
-    console.log("1.1 about to print about searchTerm");
-    //console.log("2. searchTerm" + typeof searchRef.current.value);
+    try {
+      //getting videos as a result of submitting something in the search bar, therefore not as a result of refreshing.
+      let searchTerm = localStorage.getItem("searchItem")
+        ? localStorage.getItem("searchItem")
+        : "penguins";
+      console.log("1. searchTerm" + searchTerm);
+      console.log("1.1 about to print about searchTerm");
+      //console.log("2. searchTerm" + typeof searchRef.current.value);
 
-    /*
+      /*
     let searchStr = searchRef.current.value
       ? searchRef.current.value
       : searchTerm;
     */
-    history.push(`/home/${searchTerm}`);
+      history.push(`/home/${searchTerm}`);
 
-    let res = nextPageToken
-      ? await axios.get("https://youtube.googleapis.com/youtube/v3/search?", {
-          params: {
-            part: "snippet",
-            maxResults: 25,
-            pageToken: nextPageToken,
-            q: searchTerm,
-            key: apiKey,
-            videoEmbeddable: "any",
-          },
-        })
-      : await axios.get("https://youtube.googleapis.com/youtube/v3/search?", {
-          params: {
-            part: "snippet",
-            maxResults: 25,
-            q: searchTerm,
-            key: apiKey,
-            videoEmbeddable: "any",
-          },
-        });
-    await console.log(searchTerm);
-    await console.log(res.data.items);
-    let dataList = [...res.data.items]; //*****changes might mess up */
-    checkDataHasId(dataList); //*****changes might mess up */
-    //1st load scenario and new search term entered scenario
-    if (
-      videos.length === 0 ||
-      searchTerm.localeCompare(JSON.parse(localStorage.getItem(searchItem))) !==
-        0
-    ) {
-      await localStorage.setItem(searchTerm, JSON.stringify(dataList));
-      await localStorage.setItem("videos", JSON.stringify(dataList));
-      await setVideos((previousVideos) => {
-        return dataList;
-      });
-
-      if (historyVideosArr[0].searchTermH.localeCompare(searchTerm) !== 0) {
-        await historyVideosArr.unshift({
-          searchTermH: searchTerm,
-          historyVidList: dataList,
-          date: moment().tz("Europe/Madrid").format(),
+      let res = nextPageToken
+        ? await axios.get("https://youtube.googleapis.com/youtube/v3/search?", {
+            params: {
+              part: "snippet",
+              maxResults: 25,
+              pageToken: nextPageToken,
+              q: searchTerm,
+              key: apiKey,
+              videoEmbeddable: "any",
+            },
+          })
+        : await axios.get("https://youtube.googleapis.com/youtube/v3/search?", {
+            params: {
+              part: "snippet",
+              maxResults: 25,
+              q: searchTerm,
+              key: apiKey,
+              videoEmbeddable: "any",
+            },
+          });
+      await console.log(searchTerm);
+      await console.log(res.data.items);
+      let dataList = [...res.data.items]; //*****changes might mess up */
+      checkDataHasId(dataList); //*****changes might mess up */
+      //1st load scenario and new search term entered scenario
+      if (
+        videos.length === 0 ||
+        searchTerm.localeCompare(
+          JSON.parse(localStorage.getItem(searchItem))
+        ) !== 0
+      ) {
+        await localStorage.setItem(searchTerm, JSON.stringify(dataList));
+        await localStorage.setItem("videos", JSON.stringify(dataList));
+        await setVideos((previousVideos) => {
+          return dataList;
         });
 
+        if (historyVideosArr[0].searchTermH.localeCompare(searchTerm) !== 0) {
+          await historyVideosArr.unshift({
+            searchTermH: searchTerm,
+            historyVidList: dataList,
+            date: moment().tz("Europe/Madrid").format(),
+          });
+
+          await localStorage.setItem(
+            "historyVideos",
+            JSON.stringify(historyVideosArr)
+          );
+          await setHistoryVideos((prevHistoryVideos) => historyVideosArr);
+
+          await addToHistoryMix(historyVideosArr, historyMixArr, searchTerm);
+        }
+      } else {
+        //Scenario that the new pagetoken is added but have the same searchtern
         await localStorage.setItem(
-          "historyVideos",
-          JSON.stringify(historyVideosArr)
+          searchTerm,
+          JSON.stringify([...videos, ...dataList])
         );
-        await setHistoryVideos((prevHistoryVideos) => historyVideosArr);
-
-        await addToHistoryMix(historyVideosArr, historyMixArr, searchTerm);
+        await localStorage.setItem(
+          "videos",
+          JSON.stringify([...videos, ...dataList])
+        );
+        await setVideos((previousVideos) => {
+          return [...previousVideos, ...dataList];
+        });
       }
-    } else {
-      //Scenario that the new pagetoken is added but have the same searchtern
-      await localStorage.setItem(
-        searchTerm,
-        JSON.stringify([...videos, ...dataList])
+
+      //setting the page token corresponding the current list downloaded
+      await localStorage.setItem("nextPageToken", res.data.nextPageToken);
+      //setting the searchItem to the current ref or "penguins" - refresh not considered here
+      await setSearchItem((prev) => searchTerm);
+      await localStorage.setItem("searchItem", searchTerm);
+      await setSelectedVideo(
+        (prev) => JSON.parse(localStorage.getItem(searchTerm))[0]
       );
-      await localStorage.setItem(
-        "videos",
-        JSON.stringify([...videos, ...dataList])
+      await setSelectId(
+        (prev) => JSON.parse(localStorage.getItem(searchTerm))[0].id.videoId
       );
-      await setVideos((previousVideos) => {
-        return [...previousVideos, ...dataList];
+      //await setSelectedVideo((prev) => res.data.items[0]);
+      //await setSelectId((prev) => res.data.items[0].id.videoId);
+      await setLoadVideos((prev) => false);
+      await console.log(
+        "location.pathname after big code=" + location.pathname.substring(6)
+      );
+
+      await setVideoSearchErr((prev) => {
+        return {
+          status: false,
+          errLog: [...videoSearchErr.errLog],
+        };
       });
-    }
-
-    //setting the page token corresponding the current list downloaded
-    await localStorage.setItem("nextPageToken", res.data.nextPageToken);
-    //setting the searchItem to the current ref or "penguins" - refresh not considered here
-    await setSearchItem((prev) => searchTerm);
-    await localStorage.setItem("searchItem", searchTerm);
-    await setSelectedVideo(
-      (prev) => JSON.parse(localStorage.getItem(searchTerm))[0]
-    );
-    await setSelectId(
-      (prev) => JSON.parse(localStorage.getItem(searchTerm))[0].id.videoId
-    );
-    //await setSelectedVideo((prev) => res.data.items[0]);
-    //await setSelectId((prev) => res.data.items[0].id.videoId);
-    await setLoadVideos((prev) => false);
-    await console.log(
-      "location.pathname after big code=" + location.pathname.substring(6)
-    );
-
-    await setVideoSearchErr((prev) => {
-      return {
-        status: false,
-        errLog: [...videoSearchErr.errLog],
-      };
-    });
-    await localStorage.setItem(
-      "videoSearchErr",
-      JSON.stringify({
-        status: false,
-        errLog: [...videoSearchErr.errLog],
-      })
-    ); /*
+      await localStorage.setItem(
+        "videoSearchErr",
+        JSON.stringify({
+          status: false,
+          errLog: [...videoSearchErr.errLog],
+        })
+      );
     } catch (error) {
       setLoadVideos((prev) => false);
       console.log("9999-searchctx -ERROR" + error);
@@ -199,7 +200,7 @@ const VideoSearchProvider = (props) => {
           errLog: [...videoSearchErr.errLog, { error }],
         })
       );
-    } */
+    }
   };
 
   //adding to historyMix function
