@@ -3,6 +3,7 @@ import FavoritesItem from "./FavoritesItem";
 import moment from "moment";
 import { Fragment, useContext, useEffect } from "react";
 import { FavoritesContext } from "./store/FavoritesCtx";
+import CarouselSlider2 from "./UI/CarouselSlider2";
 
 const VideoList = ({
   loadVideos,
@@ -129,11 +130,17 @@ const VideoList = ({
   return (
     <Fragment>
       {loadVideos && <p>Loading videos...</p>}
-      {!loadVideos &&
-        videoListType !== "favorites" &&
-        videoListShow !== null && (
-          <div className="video-list-wrapper">{videoListShow}</div>
-        )}
+      {!loadVideos && videoListType !== "favorites" && videoListShow !== null && (
+        <Fragment>
+          <div className="video-list-wrapper">
+            <CarouselSlider2
+              items={videoListShow}
+              itemNumber={videoListState ? videoListState.length : 0}
+              className="carousel-slider-1"
+            />
+          </div>
+        </Fragment>
+      )}
       {!loadVideos &&
         videoListType !== "favorites" &&
         (videoListShow === null || videoListShow.length < 1) && (

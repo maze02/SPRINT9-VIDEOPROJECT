@@ -13,21 +13,27 @@ const CardSecondary = ({ children, id, videoListType, pressed }) => {
 
 const Wrapper = styled.div`
   color: black;
+  width: 100%;
   max-width: 250px;
-  min-width: 200px;
+  max-width: 13rem; //208px
+  //height: 12rem;
+  height: 11.9rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
   display: grid;
   grid-template-rows: 60% 30%;
-  width: 100%;
-  max-width: 13rem;
+
   margin: 0rem 1rem 0rem 0rem;
   padding-bottom: -1rem;
   //border-radius: 1rem;
   cursor: pointer;
-  height: 12rem;
+
   transition: transform 450ms;
 
   &:hover {
     transform: scale(1.05);
+    //margin-top: 100px;
     //transition: all 0.1s ease-out;
   }
   //flex: 0 0 auto;
