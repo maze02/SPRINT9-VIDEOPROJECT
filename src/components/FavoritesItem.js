@@ -10,14 +10,11 @@ const FavoritesItem = ({
   id,
   title,
   handleVideoSelect,
-  description,
   videoListState,
   videoListType,
   url,
-  date,
-  favorite,
 }) => {
-  const { favorites, toggleFavorite } = useContext(FavoritesContext);
+  const { toggleFavorite } = useContext(FavoritesContext);
   return (
     <Wrapper>
       <div className="container">
@@ -62,7 +59,6 @@ const Wrapper = styled.article`
     background: var(--clr-black);
     max-width: 20rem;
     margin-bottom: 1rem;
-    //border-radius: var(--radius);
     img {
       width: 100%;
       display: block;
@@ -133,7 +129,6 @@ const Wrapper = styled.article`
   @media screen and (min-width: 578px) {
     .container {
       margin-bottom: 0rem;
-      //border-radius: var(--radius);
     }
   }
 `;

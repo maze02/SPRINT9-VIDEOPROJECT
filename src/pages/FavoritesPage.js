@@ -5,7 +5,6 @@ import { FavoritesContext } from "../components/store/FavoritesCtx";
 import { VideoDetailContext } from "../components/store/VideoDetailCtx";
 import SearchBar from "../components/SearchBar";
 import { VideoSearchContext } from "../components/store/VideoSearchCtx";
-import FilmListSwipe from "../components/UI/CarouselSlider";
 
 const FavoritesPage = () => {
   const { searchRef, handleSubmit } = useContext(VideoSearchContext);

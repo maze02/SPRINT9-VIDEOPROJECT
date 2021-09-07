@@ -18,33 +18,13 @@ const MainPage = () => {
     handleSubmit,
     videoSearchErr,
     searchItem,
-    refreshMain,
-    setSearchItem,
-    setVideos,
-    setNextPageToken,
-    setLoadVideos,
   } = useContext(VideoSearchContext);
   const { favorites } = useContext(FavoritesContext);
   const { handleVideoSelect } = useContext(VideoDetailContext);
 
   let vidListTerm = searchItem ? searchItem : "penguins";
   let loadVideosL = loadVideos;
-  //let searchRefM = searchRef;
 
-  /* ******changes
-  if (refreshMain) {
-    vidListTerm = localStorage.getItem("searchItem");
-    //loadVideosL = JSON.parse(localStorage.getItem(vidListTerm));
-    //pageTokenL = localStorage.getItem("nextPageToken");
-    //setSearchItem((prev) => searchTermL);
-    //setVideos((prev) => vidL);
-    //SORT OUT PAGETOKEN -> GET FROM setNextPageToken((prev) => pageTokenL);
-    loadVideosL = false;
-    //setRefreshMain((prev) => false);
-    //setLoadVideos((prev) => false);
-  }
-*/
-  //let date = moment();
   return (
     <Fragment>
       <section className="section-searchbar-wrapper">
@@ -100,58 +80,3 @@ const MainPage = () => {
 };
 
 export default MainPage;
-
-/*
- <section className="section-searchbar-wrapper">
-        <div className="border">
-          <SearchBar searchRef={searchRef} handleSubmit={handleSubmit} />
-        </div>
-      </section>
-
-*/
-//let vidListTerm = JSON.parse(localStorage.getItem("searchItem"));
-// vidListTerm = searchRef.current.value ? searchRef.current.value : "penguins";
-/*
- if (
-    searchRef.current.value !== undefined ||
-    searchRef.current.value !== null
-  ) {
-    console.log("why you reading the condition if it doesn't apply to you");
-    vidListTerm = searchRef.current.value
-      ? searchRef.current.value
-      : "penguins";
-  }
-*/
-/*//////////////from VideoSearchcontext
-   if (refreshMain) {
-        let searchTermL = localStorage.getItem("searchItem");
-        let vidL = JSON.parse(localStorage.getItem(searchTermL));
-        let pageTokenL = localStorage.getItem("nextPageToken");
-        setSearchItem((prev) => searchTermL);
-        setVideos((prev) => vidL);
-        setNextPageToken((prev) => pageTokenL);
-        setRefreshMain((prev) => false);
-        setLoadVideos((prev) => false);
-      } else {
-  /////
-
-
-  useEffect(() => {
-    console.log("1st REFRESH CHECK");
-    console.log("location.pathname OIIII" + location.pathname.substring(1));
-    let localSearch = localStorage.getItem("searchItem");
-    if (localSearch) {
-      console.log("localSearch :" + localSearch);
-      let res = localSearch.localeCompare(location.pathname.substring(1));
-      console.log("comparison result of local and url " + res);
-      //refresh scenario
-      if (
-        res === 0 &&
-        searchItem.localeCompare(location.pathname.substring(1))
-      ) {
-        console.log("browser was refreshed");
-        setRefreshMain((prev) => true);
-      }
-    }
-  }, [location.pathname, searchItem]);
-*/

@@ -64,19 +64,7 @@ const VideoDetailComponent = styled.article`
     border-radius: 1rem !important;
     margin: 0.7rem;
     background-color: lightcyan;
-    // margin-top: 0rem !important;
-
-    //flex-direction: horizontal;
-    /*top: 7rem;*/
-
     overflow-y: scroll;
-    //height: calc(95vh - 80px);
-    /*calc(100vh - 80px)*/
-    /*  width: 90vw; */
-
-    //max-width: 300px;
-    //background: grey;
-
     position: sticky;
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
@@ -122,7 +110,6 @@ const VideoDetailComponent = styled.article`
     }
 
     @media screen and (min-width: 1084px) {
-      //margin: 1rem 2rem 1rem 0rem;
       margin: 1rem !important;
       padding: 1rem !important;
       width: 100%;

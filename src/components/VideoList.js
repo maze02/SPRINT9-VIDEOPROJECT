@@ -1,7 +1,7 @@
 import VideoItem from "./VideoItem";
 import FavoritesItem from "./FavoritesItem";
 import moment from "moment";
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useContext } from "react";
 import { FavoritesContext } from "./store/FavoritesCtx";
 import CarouselSlider2 from "./UI/CarouselSlider2";
 
@@ -17,22 +17,8 @@ const VideoList = ({
   let videoListShow = null;
   let favoritesArr = [];
   let favoritesL = localStorage.getItem("favorites");
-  let vidListTermL = localStorage.getItem(vidListTerm);
   let videoListArr = JSON.parse(localStorage.getItem(vidListTerm));
-  console.log("OIOIOI -videoListState" + videoListState);
-  console.log("AIII-videoListArr- " + videoListArr);
-  console.log("UIUI-vidlistTerm -" + vidListTerm);
-  console.log(
-    "UKUK-vidlistTermL -loadVideos" + " " + loadVideos + " " + vidListTermL
-  );
-  console.log("FI FI FI-loadVideos-" + loadVideos);
 
-  /*
-  if (favoritesL) {
-    //checking there are videos saved in favorites
-    favoritesArr = JSON.parse(favoritesL);
-  }
-  */
   //helper function
   const favoriteCheck = (id, favoritesLP, favoritesArrP) => {
     let favoriteStatus = false;
@@ -61,11 +47,6 @@ const VideoList = ({
             if (videoListArr[i].snippet === undefined) {
               videoListArr.splice(i, 1);
             }
-            /*
-        if (videoListArr[i].id.videoId === undefined) {
-          videoListArr.splice(i, 1);
-        }
-        */
           }
           for (let i = 0; i < videoListArr.length; i++) {
             if (videoListArr[i].favoriteStatus === undefined) {

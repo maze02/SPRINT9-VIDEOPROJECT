@@ -37,10 +37,6 @@ const Wrapper = styled.div`
         transform: scale(1.05);
         cursor: pointer;
       }
-
-      //    @media screen and (min-width: 578px) {
-      //    margin-right: 3rem;
-      //    }
     }
   }
 
@@ -48,8 +44,6 @@ const Wrapper = styled.div`
     display: grid;
     grid-template-columns: 20% 80%;
     align-items: center;
-    //    display: flex;
-    //  justify-content: flex-start;
 
     .image-cropper {
       margin: 0.5rem 0rem 0.5rem 0rem;

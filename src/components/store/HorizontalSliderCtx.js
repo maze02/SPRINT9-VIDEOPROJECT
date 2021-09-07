@@ -20,7 +20,6 @@ const HorizontalSliderProvider = (props) => {
     let dis = e.nativeEvent.offsetX - innerSliderRef.current.offsetLeft;
 
     console.log(innerSliderRef.current.offsetLeft);
-    //    console.log("e.offsetX " + e.nativeEvent.offsetX);
     console.log(e.nativeEvent.offsetX);
     console.log("dis-> " + dis);
     setStartX((prev) => dis);
@@ -56,28 +55,8 @@ const HorizontalSliderProvider = (props) => {
     } else if (inner.right < outer.right) {
       innerslider.current.style.left = `-${inner.width - outer.width}px`;
     }
-
-    //if(parseInt(innerSlider.current.style))
   };
-  /*
-  const { setSelectedVideo, selectedVideo } = useContext(VideoSearchContext);
-  const { handleVideoSelect } = useContext(VideoDetailContext);
-  let selHistoryL = localStorage.getItem("selectedHistory");
-  let selHistoryArr = selHistoryL ? JSON.parse(selHistoryL) : [];
-  const [selectedHistory, setSelectedHistory] = useState(selHistoryArr);
 
-  const history = useHistory();
-
-  const handleViewHistory = (termP) => {
-    let hisViewStr = localStorage.getItem(termP);
-    let hisViewArr = hisViewStr ? JSON.parse(hisViewStr) : [];
-    setSelectedHistory((prev) => hisViewArr);
-    localStorage.setItem("seletedHistory", hisViewStr);
-    handleVideoSelect(hisViewArr[0].id.videoId, "selectedHistory");
-    setSelectedVideo((prev) => hisViewArr[0]);
-    localStorage.setItem("selectedVideo", JSON.stringify(hisViewArr[0]));
-  };
-*/
   return (
     <HorizontalSliderContext.Provider
       value={{

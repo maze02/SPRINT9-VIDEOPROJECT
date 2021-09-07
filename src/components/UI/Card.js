@@ -16,27 +16,19 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: 250px;
   max-width: 13rem; //208px
-  //height: 12rem;
   height: 11.9rem;
   padding-top: 1rem;
-  padding-bottom: 1rem;
-
+  padding-bottom: -1rem;
   display: grid;
   grid-template-rows: 60% 30%;
-
   margin: 0rem 1rem 0rem 0rem;
-  padding-bottom: -1rem;
-  //border-radius: 1rem;
   cursor: pointer;
-
   transition: transform 450ms;
 
   &:hover {
     transform: scale(1.05);
-    //margin-top: 100px;
-    //transition: all 0.1s ease-out;
   }
-  //flex: 0 0 auto;
+
   .img-wrapper {
     width: auto;
     object-fit: cover;
@@ -68,10 +60,6 @@ const Wrapper = styled.div`
       margin-top: 0rem;
       padding-bottom: 1rem;
       text-overflow: ellipsis;
-      //clear: both;
-      //display: inline-block;
-      //overflow: hidden;
-      //white-space: nowrap;
 
       .description-title {
         display: inline-block;
@@ -89,7 +77,6 @@ const Wrapper = styled.div`
     align-items: center;
     margin-top: -1.8rem;
     padding-top: 1.2rem;
-
     p {
       font-size: 0.8rem;
     }

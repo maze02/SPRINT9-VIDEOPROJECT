@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
 import { VideoDetailContext } from "./VideoDetailCtx";
 import { VideoSearchContext } from "./VideoSearchCtx";
 
@@ -9,8 +8,6 @@ const HistoryProvider = (props) => {
   let selHistoryL = localStorage.getItem("selectedHistory");
   let selHistoryArr = selHistoryL ? JSON.parse(selHistoryL) : [];
   const [selectedHistory, setSelectedHistory] = useState(selHistoryArr);
-
-  const history = useHistory();
 
   const handleViewHistory = (termP) => {
     let hisViewStr = localStorage.getItem(termP);

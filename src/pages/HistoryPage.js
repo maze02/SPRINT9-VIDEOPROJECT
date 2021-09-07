@@ -9,7 +9,6 @@ import SearchBar from "../components/SearchBar";
 import VideoDetail from "../components/VideoDetail";
 import VideoList from "../components/VideoList";
 const HistoryPage = () => {
-  const { selectedHistory } = useContext(HistoryContext);
   const { lastViewed, handleVideoSelect } = useContext(VideoDetailContext);
   const { historyMix, historyVideos, searchRef, handleSubmit } =
     useContext(VideoSearchContext);

@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { useState, useEffect, Fragment } from "react";
-import { Button, Accordion } from "@material-ui/core";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -143,7 +142,6 @@ const NavWrapper = styled.nav`
     margin-right: 5rem;
     height: 0.05rem;
     background-color: var(--font-white-1);
-    //border: var(--font-white-1) solid 1rem;
   }
 `;
 

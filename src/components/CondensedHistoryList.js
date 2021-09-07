@@ -41,10 +41,3 @@ const CondensedHistoryList = () => {
 };
 
 export default CondensedHistoryList;
-/*
-  url={e.historyVidList}
-{    
-  handleViewHistory,
-  vidListTerm,
-  videoListType,
-} */

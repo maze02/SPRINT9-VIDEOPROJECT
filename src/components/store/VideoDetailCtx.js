@@ -3,9 +3,8 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { VideoSearchContext } from "./VideoSearchCtx";
 
-// /videodetail/:videoId
 const VideoDetailProvider = (props) => {
-  const { videos, selectId, searchItem, setSelectId, setSelectedVideo } =
+  const { selectId, setSelectId, setSelectedVideo } =
     useContext(VideoSearchContext);
   let lastViewedL = localStorage.getItem("lastViewed");
   let lastViewedArr = lastViewedL ? JSON.parse(lastViewedL) : [];
@@ -15,11 +14,9 @@ const VideoDetailProvider = (props) => {
     ? JSON.parse(localStorage.getItem("relatedVideos"))
     : [];
 
-  console.log("0000-selectId =" + selectId);
   const [relatedVideos, setRelatedVideos] = useState(relaVidArr);
   const [loadRelVideos, setLoadRelVideos] = useState(true);
   const [nextRelPageToken, setRelNextPageToken] = useState("");
-  console.log("111111111111-SETTING REFRESHDETAILPAGE-> TRUE");
   const [refreshDetailPg, setRefreshDetailPg] = useState(true);
   const [videoDetailErr, setVideoDetailErr] = useState({
     status: false,
@@ -31,11 +28,8 @@ const VideoDetailProvider = (props) => {
   //refresh checkpoint
   useEffect(() => {
     if (refreshDetailPg) {
-      console.log("9999-detailREFRESHCHECKPOINT");
-      console.log("selectId status" + selectId);
       if (selectId) {
         setRefreshDetailPg((prev) => false);
-        console.log("555555-SETTING REFRESHDETAILPAGE-> FALSE");
       }
     }
   }, [selectId]);
@@ -66,33 +60,8 @@ const VideoDetailProvider = (props) => {
     }
     getRelVideos(id);
     history.push(`/videodetail/${id}`);
-    console.log("AAAAA-vidId " + vidId);
   };
-  /*
-  const handleVideoSelect = (id) => {
-    setRefreshDetailPg((prev) => false); //not refreshing, clicking
-    localStorage.setItem("refreshDetailPg", "false");
-    setSelectId((prev) => id);
-    localStorage.setItem("selectId", JSON.stringify(id));
-    //handling page being refreshed
-    let vidId = localStorage.getItem("selectId");
-    let selectItem = null;
-    for (let i = 0; i < videos.length; i++) {
-      if (id.localeCompare(videos[i].id.videoId) === 0) {
-        selectItem = videos[i];
-        setSelectedVideo((prev) => selectItem);
-        localStorage.setItem("selectedVideo", JSON.stringify(selectItem));
-      }
-    }
-    getRelVideos(id);
-    history.push(`/videodetail/${id}`);
-    console.log("AAAAA-vidId " + vidId);
-  };
-  */
-  /*
-    console.log("SSSSSSSSSSS-inHANDLEVIDEOSELECT");
-    console.log("111111111111-SETTING REFRESHDETAILPAGE-> FALSE");
-*/
+
   const getRelVideos = async (videoId) => {
     console.log("222222- refreshDetailpg Status " + refreshDetailPg);
     let apiKey2 = `${process.env.REACT_APP_ACCESS_KEY1}`;
@@ -119,8 +88,7 @@ const VideoDetailProvider = (props) => {
               relatedToVideoId: videoId,
             },
           });
-      await console.log(res.data.items);
-      await console.log("IIIII-relatedvids-result" + res.data.items);
+
       if (refreshDetailPg === false) {
         if (
           relatedVideos.length === 0 ||
@@ -136,7 +104,6 @@ const VideoDetailProvider = (props) => {
             return res.data.items;
           });
         } else {
-          console.log("81818181-CHANGING RELATED VIDEOS IN LOCAL");
           await localStorage.setItem(
             "relatedVideos",
             JSON.stringify([...relatedVideos, ...res.data.items])

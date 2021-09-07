@@ -51,20 +51,3 @@ const App = () => {
 };
 
 export default App;
-
-/*
- if (videos.length === 0) {
-        await localStorage.setItem(searchStr, JSON.stringify(res.data.items));
-      } else {
-        await localStorage.setItem(
-          searchStr,
-          JSON.stringify([...videos, res.data.items])
-        );
-      }
-
-*/
-
-/*
-     await setSelectedVideo((prev) => videos[0]);
-      await setSelectId((prev) => videos[0].id.videoId);
-*/
