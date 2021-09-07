@@ -224,16 +224,17 @@ main {
 .video-list-wrapper {
   display: flex;
   width: 95%;
-  overflow-x: scroll;
+  //overflow-x: scroll;
   overflow-y: hidden;
   padding-left: 0.3rem 0.3rem 0.3rem 0rem;
   margin-left: -1rem;
-
+  /*
   ul li {
     &:first-child {
       padding-left: 0.3rem !important;
     }
   }
+*/
   /* width */
   &::-webkit-scrollbar {
     //height: 10px;

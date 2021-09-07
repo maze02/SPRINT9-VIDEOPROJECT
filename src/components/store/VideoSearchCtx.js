@@ -61,8 +61,8 @@ const VideoSearchProvider = (props) => {
 */
   const getVideos = async () => {
     console.log("2nd LOAD VIDEOS AFTER REFRESH CHECK");
-    let apiKey = `${process.env.REACT_APP_ACCESS_KEY1}`;
-    let apiKey2 = `${process.env.REACT_APP_ACCESS_KEY2}`;
+    let apiKey2 = `${process.env.REACT_APP_ACCESS_KEY1}`;
+    let apiKey = `${process.env.REACT_APP_ACCESS_KEY2}`;
     let apiKey0 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
     let apiKey4 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
     //console.log(
