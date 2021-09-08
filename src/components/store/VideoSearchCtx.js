@@ -201,9 +201,7 @@ const VideoSearchProvider = (props) => {
   const handleSubmit = (event) => {
     if (event.keyCode === 13) {
       event.preventDefault();
-      console.log("AAAAAENTERED-DETECTED");
       setLoadVideos((prev) => true);
-      console.log("submitting " + searchRef.current.value);
       localStorage.setItem("searchItem", searchRef.current.value);
       getVideos();
     }
