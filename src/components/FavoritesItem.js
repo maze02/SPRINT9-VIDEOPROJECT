@@ -51,6 +51,7 @@ const Wrapper = styled.article`
   justify-content: center;
   align-content: center;
   width: 100%;
+  min-width: 15rem; //added new
   .container {
     justify-content: center;
     align-self: center;

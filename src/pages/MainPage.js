@@ -69,13 +69,15 @@ const MainPage = () => {
                 : "comment-favpage-view"
             }
           >
-            <VideoList
-              loadVideos={false}
-              handleVideoSelect={handleVideoSelect}
-              vidListTerm="favorites"
-              videoListType="favorites"
-              videoListState={favorites}
-            />
+            <div className="fav-wrapper-2">
+              <VideoList
+                loadVideos={false}
+                handleVideoSelect={handleVideoSelect}
+                vidListTerm="favorites"
+                videoListType="favorites"
+                videoListState={favorites}
+              />
+            </div>
           </div>
         </section>
       </div>

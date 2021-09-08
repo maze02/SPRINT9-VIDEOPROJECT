@@ -228,11 +228,11 @@ main {
 
 .main-history-favorites-wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  width: 100%;
+  width: auto;
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 729px) {
     width: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -255,7 +255,7 @@ main {
       justify-content: center;
 
       .history-list-wrapper {
-        width: 100%;
+        width: auto;
         margin: auto;
         padding: auto;
         justify-content: center;
@@ -280,15 +280,45 @@ main {
       width: auto;
       align-items: center;
     }
-    .favorites-main-view {
+    .fav-wrapper-2 {
       display: grid;
-      grid-template-columns: 50% 50%;
-      gap: 0.5rem;
+      width: auto;
+      grid-template-columns: 100%;
+      row-gap: 0.5rem;
       justify-content: space-around;
       justify-items: center;
+      > article {
+        min-width: auto;
+      }
+      @media screen and (min-width: 800px) {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        gap: 0.5rem;
+        justify-content: space-around;
+        justify-items: center;
+
+        > article {
+          min-width: 200px !important;
+        }
+      }
     }
   }
 }
+
+/*
+  width: 100%;
+      margin: auto;
+      padding: auto;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+    
+      > article {
+        margin-bottom: 1rem;
+        align-self: center;
+      }
+*/
 
 .favorites-favpage-view {
   display: grid;

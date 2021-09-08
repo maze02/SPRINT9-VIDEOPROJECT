@@ -264,17 +264,17 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  width: 100%;
+  width: auto;
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 729px) {
   .main-history-favorites-wrapper {
     width: auto;
     display: -ms-grid;
@@ -317,7 +317,7 @@ main {
 }
 
 .main-history-favorites-wrapper .last-searches-wrapper .history-list .history-list-wrapper {
-  width: 100%;
+  width: auto;
   margin: auto;
   padding: auto;
   -webkit-box-pack: center;
@@ -367,17 +367,52 @@ main {
   }
 }
 
-.main-history-favorites-wrapper .fav-wrapper .favorites-main-view {
+.main-history-favorites-wrapper .fav-wrapper .fav-wrapper-2 {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 50% 50%;
-      grid-template-columns: 50% 50%;
-  gap: 0.5rem;
+  width: auto;
+  -ms-grid-columns: 100%;
+      grid-template-columns: 100%;
+  row-gap: 0.5rem;
   -ms-flex-pack: distribute;
       justify-content: space-around;
   justify-items: center;
 }
 
+.main-history-favorites-wrapper .fav-wrapper .fav-wrapper-2 > article {
+  min-width: auto;
+}
+
+@media screen and (min-width: 800px) {
+  .main-history-favorites-wrapper .fav-wrapper .fav-wrapper-2 {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 50% 50%;
+        grid-template-columns: 50% 50%;
+    gap: 0.5rem;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    justify-items: center;
+  }
+  .main-history-favorites-wrapper .fav-wrapper .fav-wrapper-2 > article {
+    min-width: 200px !important;
+  }
+}
+
+/*
+  width: 100%;
+      margin: auto;
+      padding: auto;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+    
+      > article {
+        margin-bottom: 1rem;
+        align-self: center;
+      }
+*/
 .favorites-favpage-view {
   display: -ms-grid;
   display: grid;
