@@ -7,12 +7,13 @@ const CardTertiary = ({ children }) => {
 const Wrapper = styled.div`
   display: grid;
   align-self: center;
+
   grid-template-columns: 75% 25%;
   align-items: center;
   border-radius: 0.4rem;
   background-color: grey;
   width: 100%;
-  margin-bottom: 0.4rem;
+  margin: 0.4rem 1rem 0.4rem 1rem !important;
   min-width: 310px;
   padding: 0rem 0.5rem 0rem 0.5rem;
   @media screen and (min-width: 578px) {
@@ -45,7 +46,7 @@ const Wrapper = styled.div`
 
   .history-info {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 20% 80%;
     align-items: center;
 
     .image-cropper {

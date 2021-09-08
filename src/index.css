@@ -12,6 +12,10 @@
   --font-white-1: white;
 }
 
+html {
+  overflow-y: scroll !important;
+}
+
 .border-styled-default, .main-history-favorites-wrapper .last-searches-wrapper, .main-history-favorites-wrapper .fav-wrapper {
   border: 0.2rem solid darkgray;
   border-radius: 1rem;

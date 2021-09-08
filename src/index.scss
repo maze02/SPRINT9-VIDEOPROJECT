@@ -12,6 +12,10 @@
   /*font shades*/
   --font-white-1: white;
 }
+
+html {
+  overflow-y: scroll !important;
+}
 $background-primary-1: rgba(22, 21, 35, 255);
 $font-white1: white;
 $border-default: 0.2rem solid darkgray;
@@ -34,6 +38,7 @@ $border-default: 0.2rem solid darkgray;
   border-radius: 1rem;
 }
 body {
+  //overflow-y: scroll; //added to stop
   background-color: $background-primary-1;
   margin: 0rem;
   ul {
