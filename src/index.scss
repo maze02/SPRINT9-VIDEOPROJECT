@@ -186,6 +186,12 @@ main {
   padding-left: 0.3rem 0.3rem 0.3rem 0rem;
   margin-left: -1rem;
 
+  ul li {
+    &:first-child {
+      padding-left: 0.3rem !important;
+    }
+  }
+
   /* width */
   &::-webkit-scrollbar {
     //height: 10px;
@@ -223,42 +229,70 @@ main {
 .main-history-favorites-wrapper {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: center;
   width: 100%;
 
-  @media screen and (min-width: 1174px) {
+  @media screen and (min-width: 769px) {
     width: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 1rem;
   }
+
   .last-searches-wrapper {
-    .heading3 {
-      margin-left: 0px;
-    }
-    @extend .border-styled-default;
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    @media screen and (min-width: 578px) {
-      width: auto;
-    }
-  }
-  .searches-wrapper {
-    @extend .border-styled-default;
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    @media screen and (min-width: 578px) {
-      width: auto;
-    }
-  }
-  .favorites-main-view {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
     width: auto;
+    @extend .border-styled-default;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    .heading3 {
+      align-items: center;
+    }
+    .history-list {
+      width: auto;
+      display: grid;
+      grid-template-columns: 100%;
+      justify-content: end;
+
+      //align-items: flex-end;
+      //display: grid;
+      //justify-content: space-around;
+      //align-items: stretch;
+      // margin-left: 0px;
+      background-color: yellow;
+      // justify-content: space-around;
+      //width: 100%;
+      // display: flex;
+      //justify-content: center;
+      // align-self: center;
+      //width: auto;
+      //align-items: center;
+      //width: 100%;
+    }
+    @media screen and (min-width: 769px) {
+      width: auto;
+    }
+  }
+  .fav-wrapper {
+    @extend .border-styled-default;
+    display: flex;
+    width: auto;
+    flex-direction: column;
+    .heading3 {
+      align-self: start;
+    }
+    @media screen and (min-width: 578px) {
+      width: auto;
+      align-items: center;
+    }
+    .favorites-main-view {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      gap: 0.5rem;
+      justify-content: space-around;
+      justify-items: center;
+    }
   }
 }
 

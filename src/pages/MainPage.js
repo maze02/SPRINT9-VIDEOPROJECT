@@ -52,9 +52,11 @@ const MainPage = () => {
       <div className="main-history-favorites-wrapper">
         <section className="last-searches-wrapper">
           <h2 className="heading3">Last searches</h2>
-          <CondensedHistoryList />
+          <div className="history-list">
+            <CondensedHistoryList />
+          </div>
         </section>
-        <section className="searches-wrapper">
+        <section className="fav-wrapper">
           <h2 className="heading3">
             Favorites videos &#183; {favorites.length}
           </h2>

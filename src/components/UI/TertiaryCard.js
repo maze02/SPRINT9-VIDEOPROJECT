@@ -12,6 +12,8 @@ const Wrapper = styled.div`
   background-color: grey;
   width: auto;
   margin-bottom: 0.4rem;
+  min-width: 310px;
+  padding: 0rem 0.5rem 0rem 0.5rem;
   @media screen and (min-width: 578px) {
     max-width: 30rem;
     padding: 0rem 1rem 0rem 1rem;
@@ -42,7 +44,7 @@ const Wrapper = styled.div`
 
   .history-info {
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 30% 70%;
     align-items: center;
 
     .image-cropper {
@@ -66,10 +68,8 @@ const Wrapper = styled.div`
     }
     .history-text {
       display: flex;
-      flex-direction: column;
-
       justify-content: flex-start;
-      margin-left: 0.5rem;
+      margin-left: 0rem;
       h4 {
         margin-right: 0.3rem;
         margin: 0rem 0.3rem;
