@@ -6,11 +6,12 @@ const CardTertiary = ({ children }) => {
 
 const Wrapper = styled.div`
   display: grid;
+  align-self: center;
   grid-template-columns: 75% 25%;
   align-items: center;
   border-radius: 0.4rem;
   background-color: grey;
-  width: auto;
+  width: 100%;
   margin-bottom: 0.4rem;
   min-width: 310px;
   padding: 0rem 0.5rem 0rem 0.5rem;

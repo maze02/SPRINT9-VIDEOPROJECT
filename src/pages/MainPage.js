@@ -53,7 +53,9 @@ const MainPage = () => {
         <section className="last-searches-wrapper">
           <h2 className="heading3">Last searches</h2>
           <div className="history-list">
-            <CondensedHistoryList />
+            <div className="history-list-wrapper">
+              <CondensedHistoryList />
+            </div>
           </div>
         </section>
         <section className="fav-wrapper">

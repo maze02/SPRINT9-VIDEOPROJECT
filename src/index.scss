@@ -251,24 +251,18 @@ main {
     }
     .history-list {
       width: auto;
-      display: grid;
-      grid-template-columns: 100%;
-      justify-content: end;
+      display: flex;
+      justify-content: center;
 
-      //align-items: flex-end;
-      //display: grid;
-      //justify-content: space-around;
-      //align-items: stretch;
-      // margin-left: 0px;
-      background-color: yellow;
-      // justify-content: space-around;
-      //width: 100%;
-      // display: flex;
-      //justify-content: center;
-      // align-self: center;
-      //width: auto;
-      //align-items: center;
-      //width: 100%;
+      .history-list-wrapper {
+        width: 100%;
+        margin: auto;
+        padding: auto;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+      }
     }
     @media screen and (min-width: 769px) {
       width: auto;
