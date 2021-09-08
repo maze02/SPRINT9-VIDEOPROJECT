@@ -36,10 +36,10 @@ const MenuHeader = styled.div`
   .menu-header {
     background-color: var(--background-primary-1);
     color: var(--font-white-1);
-
     display: flex;
     align-items: baseline;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin: 0rem 2rem 0rem 2rem;
 
     svg {
       width: 3rem;
