@@ -38,7 +38,7 @@ const MainPage = () => {
 
       {!videoSearchErr.status && (
         <section className="section-video-wrapper">
-          <h2 className="heading3">Recommended Videos</h2>
+          <h2 className="heading4">Recommended Videos</h2>
           <VideoList
             loadVideos={loadVideosL}
             handleVideoSelect={handleVideoSelect}
@@ -50,7 +50,7 @@ const MainPage = () => {
       )}
 
       <div className="main-history-favorites-wrapper">
-        <section className="searches-wrapper">
+        <section className="last-searches-wrapper">
           <h2 className="heading3">Last searches</h2>
           <CondensedHistoryList />
         </section>

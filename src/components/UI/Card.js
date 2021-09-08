@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const CardSecondary = ({ children, id, videoListType, pressed }) => {
   const clickVideo = (e) => {
-    console.log("91919191919-ID of CLICK tagName" + e.target.tagName);
     localStorage.setItem("e.target", e.target.tagName);
     if (e.target.tagName !== "svg" && e.target.tagName !== "path") {
       pressed(id, videoListType);

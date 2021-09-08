@@ -108,10 +108,18 @@ const Wrapper = styled.article`
         }
       }
       .play {
-        left: 40%;
+        left: 30%;
       }
       .trash {
-        left: 60%;
+        left: 70%;
+      }
+      @media screen and (min-width: 1657px) {
+        .play {
+          left: 40%;
+        }
+        .trash {
+          left: 60%;
+        }
       }
     }
 
