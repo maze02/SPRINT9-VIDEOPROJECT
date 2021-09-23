@@ -11,7 +11,7 @@ Not available yet
 1. Clone the repo
 
 ```
-git clone https://github.com/maze02/SPRINT9-VIDEOPROJECT.git
+git clone https://github.com/maze02/VIDEOEDU.git
 ```
 
 2. Install dependencies
