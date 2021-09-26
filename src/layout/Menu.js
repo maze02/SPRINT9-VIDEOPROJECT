@@ -8,7 +8,7 @@ const Menu = () => {
     <Wrapper>
       <h1 className="logo-header">
         <FontAwesomeIcon icon={faVideo} />
-        <span> ReactTube</span>
+        <span> VidEdu</span>
       </h1>
       <nav>
         <Nav />

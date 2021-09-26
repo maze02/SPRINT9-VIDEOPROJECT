@@ -39,11 +39,10 @@ const VideoSearchProvider = (props) => {
   const [selVidErr, setSelVidErr] = useState(false);
 
   const getVideos = async () => {
-    console.log("2nd LOAD VIDEOS AFTER REFRESH CHECK");
-    let apiKey2 = `${process.env.REACT_APP_ACCESS_KEY1}`;
-    let apiKey = `${process.env.REACT_APP_ACCESS_KEY2}`;
-    let apiKey0 = `AIzaSyBNV1xLcc3zEuseiBN2ZNiDEIe3WpUM_RM`;
-    let apiKey4 = `AIzaSyBQu_RLMTu-Fd9s-dTMNZcbRI04rbcM8zs`;
+    const apiKey2 = `${process.env.REACT_APP_ACCESS_KEY1}`;
+    const apiKey = `${process.env.REACT_APP_ACCESS_KEY2}`;
+    const apiKey0 = `${process.env.REACT_APP_ACCESS_KEY3}`;
+    const apiKey4 = `${process.env.REACT_APP_ACCESS_KEY4}`;
 
     try {
       //getting videos as a result of submitting something in the search bar, therefore not as a result of refreshing.

@@ -16,7 +16,7 @@ const MenuBurger1 = () => {
     <div className="menu-header" onClick={toggleMenu}>
       <h1>
         <FontAwesomeIcon icon={faVideo} />
-        <span className="logo-header"> ReactTube</span>
+        <span className="logo-header"> VidEdu</span>
       </h1>
       {!showMenu && <FontAwesomeIcon icon={faBars} />}
       {showMenu && <FontAwesomeIcon icon={faTimes} />}
