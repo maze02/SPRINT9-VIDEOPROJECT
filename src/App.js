@@ -1,6 +1,7 @@
 //ROUTING IMPORTS
 import { Route, Switch } from "react-router";
 import { Redirect } from "react-router-dom";
+import { Fragment } from "react";
 //CONTEXT
 import VideoSearchProvider from "./components/store/VideoSearchCtx";
 import VideoDetailProvider from "./components/store/VideoDetailCtx";
@@ -14,8 +15,6 @@ import FavoritesPage from "./pages/FavoritesPage";
 import HistoryPage from "./pages/HistoryPage";
 import MainPage from "./pages/MainPage";
 import VideoDetailPage from "./pages/VideoDetailPage";
-
-import { Fragment } from "react";
 
 const App = () => {
   return (
