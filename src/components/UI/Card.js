@@ -1,9 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
+//TODO: Change name of card
 const CardSecondary = ({ children, id, videoListType, pressed }) => {
   const clickVideo = (e) => {
-    localStorage.setItem("e.target", e.target.tagName);
-    if (e.target.tagName !== "svg" && e.target.tagName !== "path") {
+    localStorage.setItem('e.target', e.target.tagName);
+    if (e.target.tagName !== 'svg' && e.target.tagName !== 'path') {
       pressed(id, videoListType);
     }
   };

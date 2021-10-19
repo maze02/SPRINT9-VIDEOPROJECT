@@ -1,9 +1,9 @@
-import VideoItem from "./VideoItem";
-import FavoritesItem from "./FavoritesItem";
-import moment from "moment";
-import { Fragment, useContext } from "react";
-import { FavoritesContext } from "./store/FavoritesCtx";
-import CarouselSlider2 from "./UI/CarouselSlider2";
+import VideoItem from './VideoItem';
+import FavoritesItem from './FavoritesItem';
+import moment from 'moment';
+import { Fragment, useContext } from 'react';
+import { FavoritesContext } from './store/FavoritesCtx';
+import CarouselSlider2 from './UI/CarouselSlider2';
 
 const VideoList = ({
   loadVideos,
@@ -16,7 +16,7 @@ const VideoList = ({
   const { favorites } = useContext(FavoritesContext);
   let videoListShow = null;
   let favoritesArr = [];
-  let favoritesL = localStorage.getItem("favorites");
+  let favoritesL = localStorage.getItem('favorites');
   let videoListArr = JSON.parse(localStorage.getItem(vidListTerm));
 
   //helper function
@@ -39,7 +39,7 @@ const VideoList = ({
       favoritesArr = JSON.parse(favoritesL);
     }
     videoListArr = JSON.parse(localStorage.getItem(vidListTerm));
-    if (videoListType !== "favorites") {
+    if (videoListType !== 'favorites') {
       try {
         let favoriteStatus = false;
         if (videoListArr) {
@@ -70,8 +70,8 @@ const VideoList = ({
               description={e.snippet.description}
               url={e.snippet.thumbnails.medium.url}
               date={moment(
-                e.snippet.publishTime.substring(0, 10).replace(/-/g, ""),
-                "YYYYMMDD"
+                e.snippet.publishTime.substring(0, 10).replace(/-/g, ''),
+                'YYYYMMDD'
               ).fromNow()}
               videoListState={videoListState}
               videoListType={videoListType}
@@ -81,12 +81,11 @@ const VideoList = ({
           );
         });
       } catch (error) {
-        //generating error if problem
         console.log(error);
       }
     }
     //3. generating a favorites list based on correct var input
-    if (videoListType === "favorites" && favoritesL) {
+    if (videoListType === 'favorites' && favoritesL) {
       videoListShow = videoListArr.map((e, index) => {
         return (
           <FavoritesItem
@@ -96,8 +95,8 @@ const VideoList = ({
             description={e.snippet.description}
             url={e.snippet.thumbnails.medium.url}
             date={moment(
-              e.snippet.publishTime.substring(0, 10).replace(/-/g, ""),
-              "YYYYMMDD"
+              e.snippet.publishTime.substring(0, 10).replace(/-/g, ''),
+              'YYYYMMDD'
             ).fromNow()}
             videoListState={videoListState}
             videoListType={videoListType}
@@ -111,30 +110,30 @@ const VideoList = ({
   return (
     <Fragment>
       {loadVideos && <p>Loading videos...</p>}
-      {!loadVideos && videoListType !== "favorites" && videoListShow !== null && (
+      {!loadVideos && videoListType !== 'favorites' && videoListShow !== null && (
         <Fragment>
-          <div className="video-list-wrapper">
+          <div className='video-list-wrapper'>
             <CarouselSlider2
               items={videoListShow}
               itemNumber={videoListState ? videoListState.length : 0}
-              className="carousel-slider-1"
+              className='carousel-slider-1'
             />
           </div>
         </Fragment>
       )}
       {!loadVideos &&
-        videoListType !== "favorites" &&
+        videoListType !== 'favorites' &&
         (videoListShow === null || videoListShow.length < 1) && (
-          <p className="text-center">
+          <p className='text-center'>
             No videos could be found relating to {vidListTerm}
           </p>
         )}
       {!loadVideos &&
-        videoListType === "favorites" &&
+        videoListType === 'favorites' &&
         videoListShow !== null && <Fragment>{videoListShow}</Fragment>}
-      {videoListType === "favorites" &&
+      {videoListType === 'favorites' &&
         (videoListShow === null || videoListShow.length < 1) && (
-          <p className="text-center">
+          <p className='text-center'>
             No Favorites added yet. Click on the heart icon of the videos to
             add.
           </p>

@@ -1,7 +1,8 @@
-import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 
+//TODO: Check which carousel effect used in the end and delete
 const CarouselSlider = ({ children }) => {
   const options = {
     items: 5,
@@ -11,7 +12,7 @@ const CarouselSlider = ({ children }) => {
     // responsiveClass: false,
     nav: true,
     autoplay: false,
-    navText: ["", ""],
+    navText: ['', ''],
     smartSpeed: 1000,
     stagePadding: 100,
     responsive: {
@@ -40,7 +41,7 @@ const CarouselSlider = ({ children }) => {
     },
   };
   return (
-    <OwlCarousel className="slider-items owl-carousel" {...options}>
+    <OwlCarousel className='slider-items owl-carousel' {...options}>
       {children}
     </OwlCarousel>
   );
