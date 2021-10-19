@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Menu from './Menu';
 //TODO Rename MenuBurger1
 import MenuBurger1 from './MenuBurger1';
@@ -17,13 +17,13 @@ const Layout = (props) => {
   });
 
   return (
-    <Fragment>
+    <>
       <LayoutStyled>
         {windowSize > 768 && <Menu />}
         {windowSize < 768 && <MenuBurger1 />}
         <main>{props.children}</main>
       </LayoutStyled>
-    </Fragment>
+    </>
   );
 };
 

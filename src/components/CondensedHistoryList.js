@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import CondensedHistoryItem from "./CondensedHistoryItem";
 import moment from "moment";
 
@@ -38,7 +37,7 @@ const CondensedHistoryList = () => {
   } catch (err) {
     console.log(err);
   }
-  return <Fragment>{videoListShow}</Fragment>;
+  return <>{videoListShow}</>;
 };
 
 export default CondensedHistoryList;
